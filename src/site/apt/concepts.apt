@@ -1,0 +1,25 @@
+       ---
+       Concepts 
+       
+Hiding Servlet API Complexity
+   
+   To keep things simple the servlet API (e.g. HttpServletRequest) are hidden behind simpler, more focussed
+   classes
+   
+A component based design 
+
+   The web site is built from a number of simple components. 
+   
+
+   
+Page Section
+
+
+
+Routing
+   The routing model is very similar to Ruby on Rails. The requested URL is split into component parts which are 
+   then named within in the route. The default breakdown is named [controller][action][id].
+   Each component explicitly define it matching pattern (todo - if not defined then in future should derive by 
+   convention based on package and class name
+   
+     

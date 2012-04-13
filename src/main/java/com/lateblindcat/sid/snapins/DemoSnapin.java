@@ -1,0 +1,27 @@
+package com.lateblindcat.sid.snapins;
+
+import com.lateblindcat.sid.framework.Route;
+import com.lateblindcat.sid.framework.RouteMatchResult;
+import com.lateblindcat.sid.framework.SimpleRouteMatcher;
+import com.lateblindcat.sid.framework.pages.PageResponse;
+import com.lateblindcat.sid.framework.pages.PageResponseFactory;
+
+public class DemoSnapin implements Snapin{
+
+	@Override
+	public String getName() {
+		return "Demo Snapin";
+	}
+
+	
+	@Override
+	public RouteMatchResult matchesRoute (Route route){
+		return new SimpleRouteMatcher("/demo").natches(route);
+	}
+
+	@Override
+	public PageResponse process() {		
+		return PageResponseFactory.text("This is the demo snapin");
+	}
+	
+}
