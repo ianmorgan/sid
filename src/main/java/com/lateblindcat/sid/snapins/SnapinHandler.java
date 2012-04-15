@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.server.Request;
 
-import com.lateblindcat.sid.framework.Route;
+import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 
@@ -27,7 +27,7 @@ public class SnapinHandler {
                        HttpServletResponse response) 
         throws IOException, ServletException {
 		
-		Route route = new Route(request);
+		HttpRequest route = new HttpRequest(request);
 		for (Snapin snapin : snapins){
 			RouteMatchResult matchResult = snapin.matchesRoute(route);
 			if (matchResult.matched){

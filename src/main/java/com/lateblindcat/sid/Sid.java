@@ -12,7 +12,7 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
-import com.lateblindcat.sid.framework.Route;
+import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.handlers.ImageHandler;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.snapins.DemoSnapin;
@@ -33,7 +33,7 @@ public class Sid extends AbstractHandler {
 
 			ImageHandler imageHandler = new ImageHandler();
 			PageResponse pageResponse = imageHandler.process(
-					new Route(request), null);
+					new HttpRequest(request), null);
 
 			if (pageResponse != null) {
 				byte[] buf = new byte[10000];

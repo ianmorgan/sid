@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 
 import com.lateblindcat.sid.framework.RequestData;
-import com.lateblindcat.sid.framework.Route;
+import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.framework.pages.ImageResponse;
@@ -15,7 +15,7 @@ public class ImageHandler implements Handler {
 	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher("/images");
 	
 	@Override
-	public PageResponse process(Route route, RequestData requestData) {
+	public PageResponse process(HttpRequest route, RequestData requestData) {
 		RouteMatchResult matchResult = routeMatcher.natches(route);
 		
 		if (matchResult.matched){
