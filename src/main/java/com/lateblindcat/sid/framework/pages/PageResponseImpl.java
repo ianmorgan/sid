@@ -7,16 +7,22 @@ import com.lateblindcat.sid.framework.ResponseCode;
 
 public class PageResponseImpl implements PageResponse {
 
-	private String data;
+	private InputStream data;
 	private String mimeType;
-	public PageResponseImpl(String data, String mimeType){
+
+	public PageResponseImpl(String data, String mimeType) {
+		this.data = new ByteArrayInputStream(data.getBytes());
+		this.mimeType = mimeType;
+	}
+
+	public PageResponseImpl(InputStream data, String mimeType) {
 		this.data = data;
 		this.mimeType = mimeType;
 	}
-	
+
 	@Override
 	public InputStream getContent() {
-		return new ByteArrayInputStream(data.getBytes());
+		return data;
 	}
 
 	@Override
@@ -26,7 +32,7 @@ public class PageResponseImpl implements PageResponse {
 
 	@Override
 	public String getContentType() {
-		return "text/html";
+		return mimeType;
 	}
 
 	@Override
