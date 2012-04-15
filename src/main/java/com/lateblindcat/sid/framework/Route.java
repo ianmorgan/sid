@@ -1,5 +1,11 @@
 package com.lateblindcat.sid.framework;
 
+/**
+ * A ruby on rails like routing model
+ * 
+ * @author Ian Morgan
+ * 
+ */
 public class Route {
 
 	private final RequestType requestType;
