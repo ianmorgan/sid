@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 
 import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.RequestData;
+import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.framework.pages.PageResponse;
@@ -12,11 +13,11 @@ import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 
 public class ImageHandler implements Handler {
 
-	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher("/images");
+	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher(new Route("GET:/images"));
 	
 	@Override
-	public PageResponse process(HttpRequest route, RequestData requestData) {
-		RouteMatchResult matchResult = routeMatcher.natches(route);
+	public PageResponse process(HttpRequest request, RequestData requestData) {
+		RouteMatchResult matchResult = routeMatcher.natches(request);
 		
 		if (matchResult.matched){
 			FileInputStream fis = null;
