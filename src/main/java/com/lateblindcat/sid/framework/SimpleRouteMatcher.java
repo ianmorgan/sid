@@ -12,13 +12,10 @@ package com.lateblindcat.sid.framework;
  * -----              -----------               -------
  * GET:/test          GET     /test             matched
  * GET:/test          GET     /test/this        not matched
- * GET:/test/*        GET     /test/this        matched 
- * 
- * 
+ * GET:/test/*        GET     /test/this        matched  
+ *  
  *</pre>
- * 
- * 
- * 
+ *  
  * @author Ian Morgan 
  *
  */
@@ -31,16 +28,17 @@ public class SimpleRouteMatcher {
 
 	public RouteMatchResult matches(HttpRequest request) {
 		RouteMatchResult result = new RouteMatchResult();
-		System.out.println(request.path.getParts());
+		//System.out.println(request.path.getParts());
 
 		boolean matched = true;
 		PartsList routeParts = this.route.parts();
 		PartsList requestParts = request.path.getParts();
+		PartsList matchedParts = new PartsList();
 		
 		if (requestParts.size() >= routeParts.size()) {
 			for (int i = 0; i < route.parts().size(); i++) {
 				if (routeParts.head().equals("*")){
-					// todo - pull out matching value
+					matchedParts = matchedParts.append(requestParts.head());
 				}
 				else if (!requestParts.head().equals(routeParts.head())) {
 					matched = false;
@@ -55,6 +53,8 @@ public class SimpleRouteMatcher {
 		}
 		if (matched) {
 			result.matched = true;
+			result.expandedParts = matchedParts;
+			
 			// result.remaining = new HttpRequest(route, new
 			// RequestPath(.path.getPath().substring(pattern.length())));
 		} else {

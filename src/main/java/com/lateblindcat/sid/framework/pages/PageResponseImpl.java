@@ -9,6 +9,7 @@ public class PageResponseImpl implements PageResponse {
 
 	private InputStream data;
 	private String mimeType;
+	private ResponseCode status = ResponseCode.SC_OK;
 
 	public PageResponseImpl(String data, String mimeType) {
 		this.data = new ByteArrayInputStream(data.getBytes());
@@ -19,6 +20,10 @@ public class PageResponseImpl implements PageResponse {
 		this.data = data;
 		this.mimeType = mimeType;
 	}
+	
+	public PageResponseImpl(ResponseCode status) {
+		this.status = status;
+	}
 
 	@Override
 	public InputStream getContent() {
@@ -27,7 +32,7 @@ public class PageResponseImpl implements PageResponse {
 
 	@Override
 	public ResponseCode getStatus() {
-		return ResponseCode.SC_OK;
+		return this.status;
 	}
 
 	@Override

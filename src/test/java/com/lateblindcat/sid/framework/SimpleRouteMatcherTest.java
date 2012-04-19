@@ -2,8 +2,8 @@ package com.lateblindcat.sid.framework;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -28,8 +28,8 @@ public class SimpleRouteMatcherTest {
 		matcher = new SimpleRouteMatcher(new Route("GET:/test/this"));
 		
 		// verify:
-		assertFalse (matcher.matches(servletRequest("GET", "/test")).matched);
 		assertTrue (matcher.matches(servletRequest("GET", "/test/this")).matched);
+		assertFalse (matcher.matches(servletRequest("GET", "/test")).matched);
 		assertFalse (matcher.matches(servletRequest("GET", "/test/x")).matched);
 	}
 	
@@ -40,8 +40,8 @@ public class SimpleRouteMatcherTest {
 		matcher = new SimpleRouteMatcher(new Route("GET:/test/*"));
 		
 		// verify:
-		//assertFalse (matcher.matches(servletRequest("GET", "/test")).matched);
 		assertTrue (matcher.matches(servletRequest("GET", "/test/this")).matched);
+		assertEquals("this",matcher.matches(servletRequest("GET", "/test/this")).expandedParts.head());
 		assertFalse (matcher.matches(servletRequest("GET", "/testx/this")).matched);
 	}
 

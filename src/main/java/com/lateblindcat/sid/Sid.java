@@ -13,6 +13,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import com.lateblindcat.sid.framework.HttpRequest;
+import com.lateblindcat.sid.framework.ResponseCode;
 import com.lateblindcat.sid.framework.handlers.ImageHandler;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.snapins.DemoSnapin;
@@ -32,19 +33,24 @@ public class Sid extends AbstractHandler {
 		if (!runner.handle(baseRequest, request, response)) {
 
 			ImageHandler imageHandler = new ImageHandler();
-			PageResponse pageResponse = imageHandler.process(
-					new HttpRequest(request), null);
+			PageResponse pageResponse = imageHandler.process(new HttpRequest(
+					request), null);
 
 			if (pageResponse != null) {
-				byte[] buf = new byte[10000];
-				int len = pageResponse.getContent().read(buf);
-				response.getOutputStream().write(buf,0,len);
-				response.setStatus(pageResponse.getStatus().getHttpCode());
-				response.setContentType(pageResponse.getContentType());
-				
-				if (pageResponse.isInline()){
-					response.addHeader("content-disposition","inline");
-					response.addHeader("content-length", Integer.toString(len));	
+				if (pageResponse.getStatus().equals(ResponseCode.SC_OK)) {
+					byte[] buf = new byte[10000];
+					int len = pageResponse.getContent().read(buf);
+					response.getOutputStream().write(buf, 0, len);
+					response.setStatus(pageResponse.getStatus().getHttpCode());
+					response.setContentType(pageResponse.getContentType());
+
+					if (pageResponse.isInline()) {
+						response.addHeader("content-disposition", "inline");
+						response.addHeader("content-length",
+								Integer.toString(len));
+					}
+				} else {
+					response.setStatus(pageResponse.getStatus().getHttpCode());
 				}
 				baseRequest.setHandled(true);
 

@@ -2,6 +2,8 @@ package com.lateblindcat.sid.framework.pages;
 
 import java.io.InputStream;
 
+import com.lateblindcat.sid.framework.ResponseCode;
+
 /**
  * 
  * A simple factory style class for create new types of responses, e.g. html,
@@ -21,8 +23,15 @@ public class PageResponseFactory {
 	}
 	
 	public static PageResponse jpeg(InputStream image){
-		return new PageResponseImpl(image, "image/jpeg");
-		
+		return new PageResponseImpl(image, "image/jpeg");		
+	}
+	
+	public static PageResponse notFound(){
+		return new PageResponseImpl(ResponseCode.SC_NOT_FOUND);
+	}
+
+	public static PageResponse internalError() {
+		return new PageResponseImpl(ResponseCode.SC_INTERNAL_SERVER_ERROR);
 	}
 
 }
