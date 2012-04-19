@@ -21,7 +21,7 @@ public class DemoSnapin implements Snapin{
 	
 	@Override
 	public RouteMatchResult matchesRoute (HttpRequest route){
-		return new SimpleRouteMatcher(new Route("GET:/demo")).natches(route);
+		return new SimpleRouteMatcher(new Route("GET:/demo")).matches(route);
 	}
 
 	@Override

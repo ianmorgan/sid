@@ -1,26 +1,60 @@
 package com.lateblindcat.sid.framework;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 public class SimpleRouteMatcherTest {
+	private SimpleRouteMatcher matcher;
 	
 	@Test
 	public void simpleGetRequest() {
-		Route route = new Route("GET:/test");
+		// setup:
+		matcher = new SimpleRouteMatcher(new Route("GET:/test"));
 		
-		MockHttpServletRequest servletRequest = new MockHttpServletRequest();
-		servletRequest.setPathInfo("/test");
-		servletRequest.setMethod("GET");
-		HttpRequest request = new HttpRequest (servletRequest);
-		
-		assertTrue (new SimpleRouteMatcher(route).natches(request).matched);
-//
-//		assertEquals(RequestType.GET, route.requestType());
-//		assertEquals(1, route.parts().length);
-//		assertEquals("test", route.parts()[0]);
+		// verify:
+		assertTrue (matcher.matches(servletRequest("GET", "/test")).matched);
+		assertFalse (matcher.matches(servletRequest("GET", "/Test")).matched);
+		assertFalse (matcher.matches(servletRequest("GET", "/testx")).matched);
+		assertFalse (matcher.matches(servletRequest("GET", "/xxx")).matched);
 	}
+	
+	@Test
+	public void getRequestWithNestedParts() {
+		// setup:
+		matcher = new SimpleRouteMatcher(new Route("GET:/test/this"));
+		
+		// verify:
+		assertFalse (matcher.matches(servletRequest("GET", "/test")).matched);
+		assertTrue (matcher.matches(servletRequest("GET", "/test/this")).matched);
+		assertFalse (matcher.matches(servletRequest("GET", "/test/x")).matched);
+	}
+	
+	
+	@Test
+	public void simpleGetRequestWithWildcard() {
+		// setup:
+		matcher = new SimpleRouteMatcher(new Route("GET:/test/*"));
+		
+		// verify:
+		//assertFalse (matcher.matches(servletRequest("GET", "/test")).matched);
+		assertTrue (matcher.matches(servletRequest("GET", "/test/this")).matched);
+		assertFalse (matcher.matches(servletRequest("GET", "/testx/this")).matched);
+	}
+
+	private HttpRequest servletRequest(String method, String path) {
+		MockHttpServletRequest servletRequest = new MockHttpServletRequest();
+		servletRequest.setPathInfo(path);
+		servletRequest.setMethod(method);
+		HttpRequest request = new HttpRequest (servletRequest);
+		return request;
+	}
+
+
+	
+
 
 }

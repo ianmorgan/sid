@@ -23,23 +23,31 @@ package com.lateblindcat.sid.framework;
  *
  */
 public class SimpleRouteMatcher {
-	private Route route;
+	private final Route route;
 
 	public SimpleRouteMatcher(Route route) {
 		this.route = route;
 	}
 
-	public RouteMatchResult natches(HttpRequest request) {
+	public RouteMatchResult matches(HttpRequest request) {
 		RouteMatchResult result = new RouteMatchResult();
 		System.out.println(request.path.getParts());
 
 		boolean matched = true;
-		if (request.path.getParts().size() >= route.parts().length) {
-			for (int i = 0; i < route.parts().length; i++) {
-				if (!request.path.getParts().get(i).equals(route.parts()[i])) {
+		PartsList routeParts = this.route.parts();
+		PartsList requestParts = request.path.getParts();
+		
+		if (requestParts.size() >= routeParts.size()) {
+			for (int i = 0; i < route.parts().size(); i++) {
+				if (routeParts.head().equals("*")){
+					// todo - pull out matching value
+				}
+				else if (!requestParts.head().equals(routeParts.head())) {
 					matched = false;
 					break;
 				}
+				routeParts = routeParts.tail();
+				requestParts = requestParts.tail();
 			}
 
 		} else {

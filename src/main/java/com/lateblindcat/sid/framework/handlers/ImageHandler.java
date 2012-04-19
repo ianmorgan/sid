@@ -17,7 +17,7 @@ public class ImageHandler implements Handler {
 	
 	@Override
 	public PageResponse process(HttpRequest request, RequestData requestData) {
-		RouteMatchResult matchResult = routeMatcher.natches(request);
+		RouteMatchResult matchResult = routeMatcher.matches(request);
 		
 		if (matchResult.matched){
 			FileInputStream fis = null;
