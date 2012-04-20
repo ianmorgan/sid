@@ -28,35 +28,33 @@ public class SimpleRouteMatcher {
 
 	public RouteMatchResult matches(HttpRequest request) {
 		RouteMatchResult result = new RouteMatchResult();
-		//System.out.println(request.path.getParts());
 
-		boolean matched = true;
+		boolean matched = false;
 		PartsList routeParts = this.route.parts();
 		PartsList requestParts = request.path.getParts();
 		PartsList matchedParts = new PartsList();
 		
-		if (requestParts.size() >= routeParts.size()) {
-			for (int i = 0; i < route.parts().size(); i++) {
+		// TODO: This really could be quite a lot neater	
+		while (true) {
+			if (!routeParts.isEmpty() && !requestParts.isEmpty()) {		
 				if (routeParts.head().equals("*")){
 					matchedParts = matchedParts.append(requestParts.head());
 				}
 				else if (!requestParts.head().equals(routeParts.head())) {
-					matched = false;
 					break;
 				}
 				routeParts = routeParts.tail();
 				requestParts = requestParts.tail();
 			}
-
-		} else {
-			matched = false;
+			else {
+				// have we consumed both sides of the list ?
+				matched = routeParts.isEmpty() && requestParts.isEmpty();
+				break;
+			}
 		}
 		if (matched) {
 			result.matched = true;
 			result.expandedParts = matchedParts;
-			
-			// result.remaining = new HttpRequest(route, new
-			// RequestPath(.path.getPath().substring(pattern.length())));
 		} else {
 			result.matched = false;
 		}

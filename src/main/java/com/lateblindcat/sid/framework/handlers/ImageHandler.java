@@ -20,7 +20,6 @@ public class ImageHandler implements Handler {
 	public PageResponse process(HttpRequest request, RequestData requestData) {
 		RouteMatchResult matchResult = routeMatcher.matches(request);
 	
-		
 		if (matchResult.matched){
 			PageResponse response ;
 			FileInputStream fis = null;

@@ -20,6 +20,7 @@ public class SimpleRouteMatcherTest {
 		assertFalse (matcher.matches(servletRequest("GET", "/Test")).matched);
 		assertFalse (matcher.matches(servletRequest("GET", "/testx")).matched);
 		assertFalse (matcher.matches(servletRequest("GET", "/xxx")).matched);
+		assertFalse (matcher.matches(servletRequest("GET", "/test/x")).matched);
 	}
 	
 	@Test

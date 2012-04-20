@@ -12,10 +12,17 @@ import com.lateblindcat.sid.framework.pages.PageResponse;
  *
  */
 public interface Snapin {
+	/**
+	 * The display name - used in titles, menus
+	 * @return
+	 */
 	String getName();
 	
+	/**
+	 * The route to match against
+	 * @return
+	 */
 	String getRoute();
-	
-	RouteMatchResult matchesRoute (HttpRequest route);
+
 	PageResponse process();
 }
