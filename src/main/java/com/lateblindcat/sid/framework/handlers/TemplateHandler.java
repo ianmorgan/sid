@@ -1,5 +1,6 @@
 package com.lateblindcat.sid.framework.handlers;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,8 +43,9 @@ public class TemplateHandler implements Handler {
 					renderer = renderers.get(templateType);
 				}
 				if (renderer != null) {
-					StringExpression content = renderer.render(StringExpressionFactory
-							.fromString("src/main/resources/templates/" + matchResult.expandedParts.expandToPath()));
+					StringExpression rawContent = StringExpressionFactory.fromFile(new File(
+							"src/main/resources/templates/" + matchResult.expandedParts.expandToPath()));
+					StringExpression content = renderer.render(rawContent);
 					response = PageResponseFactory.html(content);
 				} else {
 					response = PageResponseFactory.html("unrecognized template type");

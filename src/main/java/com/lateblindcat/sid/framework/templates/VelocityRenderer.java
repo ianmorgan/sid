@@ -30,19 +30,20 @@ public class VelocityRenderer implements Renderer {
 	}
 
 	@Override
-	public StringExpression render(StringExpression templateName) {
+	public StringExpression render(StringExpression template) {
 
 		VelocityContext context = new VelocityContext();
 		context.put("name", new String("Velocity"));
 		context.put("now", new Date());
-		Template template = null;
 
 		String name = null;
 		try {
-			name = templateName.evalute();
-			template = Velocity.getTemplate(name);
+			// TODO - should be cacheing template - see
+			// http://stackoverflow.com/questions/1432468/how-to-use-string-as-velocity-template
+
+			String templateText = template.evalute();
 			StringWriter sw = new StringWriter();
-			template.merge(context, sw);
+			Velocity.evaluate(context, sw, "wibble", templateText);
 			return StringExpressionFactory.fromStringWriter(sw);
 		} catch (ResourceNotFoundException rnfe) {
 			throw new NotFoundException("Velocity", name);
@@ -54,4 +55,31 @@ public class VelocityRenderer implements Renderer {
 			throw new ProcessingException(e.getMessage());
 		}
 	}
+
+	// @Override
+	// public StringExpression render(StringExpression templateName) {
+	//
+	// VelocityContext context = new VelocityContext();
+	// context.put("name", new String("Velocity"));
+	// context.put("now", new Date());
+	// Template template = null;
+	//
+	// String name = null;
+	// try {
+	// name = templateName.evalute();
+	// template = Velocity.getTemplate(name);
+	// StringWriter sw = new StringWriter();
+	// template.merge(context, sw);
+	// return StringExpressionFactory.fromStringWriter(sw);
+	// } catch (ResourceNotFoundException rnfe) {
+	// throw new NotFoundException("Velocity", name);
+	// } catch (ParseErrorException pee) {
+	// throw new ParserException(pee.getMessage());
+	// } catch (MethodInvocationException mie) {
+	// throw new ProcessingException(mie.getMessage());
+	// } catch (Exception e) {
+	// throw new ProcessingException(e.getMessage());
+	// }
+	// }
+
 }

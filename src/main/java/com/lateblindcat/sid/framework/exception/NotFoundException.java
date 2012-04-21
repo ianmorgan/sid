@@ -8,4 +8,8 @@ public class NotFoundException extends ProcessingException {
 		super("could not locate " + resourceType + " named " + resoureName);
 	}
 
+	public NotFoundException(String resoureName) {
+		super("could not locate " + resoureName);
+	}
+
 }

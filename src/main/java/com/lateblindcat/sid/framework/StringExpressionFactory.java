@@ -1,20 +1,47 @@
 package com.lateblindcat.sid.framework;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+
+import com.lateblindcat.sid.framework.exception.NotFoundException;
+import com.lateblindcat.sid.framework.exception.ProcessingException;
 
 public class StringExpressionFactory {
 
 	public static StringExpression fromString(String data) {
 		return new ObjectBasedStringExpression(data);
 	}
-	
+
 	public static StringExpression fromStringWriter(StringWriter data) {
 		return new ObjectBasedStringExpression(data);
 	}
 
 	public static StringExpression fromInputStream(InputStream is) {
 		return new ObjectBasedStringExpression("TODO");
+	}
+
+	public static StringExpression fromFile(File f) {
+		try {
+			FileReader reader = new FileReader(f);
+			BufferedReader br = new BufferedReader(reader);
+			String s;
+			StringBuilder sb = new StringBuilder();
+			while ((s = br.readLine()) != null) {
+				sb.append(s);
+				sb.append("\n");
+			}
+			return new ObjectBasedStringExpression(sb);
+
+		} catch (FileNotFoundException e) {
+			throw new NotFoundException(f.getAbsolutePath());
+		} catch (IOException e) {
+			throw new ProcessingException("Error reading " + f.getAbsolutePath());
+		}
 	}
 
 	private static class ObjectBasedStringExpression implements StringExpression {
