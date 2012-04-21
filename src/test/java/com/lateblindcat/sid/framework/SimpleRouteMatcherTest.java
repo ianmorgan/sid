@@ -44,6 +44,21 @@ public class SimpleRouteMatcherTest {
 		assertTrue (matcher.matches(servletRequest("GET", "/test/this")).matched);
 		assertEquals("this",matcher.matches(servletRequest("GET", "/test/this")).expandedParts.head());
 		assertFalse (matcher.matches(servletRequest("GET", "/testx/this")).matched);
+		assertFalse (matcher.matches(servletRequest("GET", "/test/a/b/")).matched);
+	}
+	
+	@Test
+	public void simpleGetRequestWithGlobbingWildcard() {
+		// setup:
+		matcher = new SimpleRouteMatcher(new Route("GET:/test/**"));
+		
+		// verify:
+		assertTrue (matcher.matches(servletRequest("GET", "/test/this")).matched);
+		assertEquals("this",matcher.matches(servletRequest("GET", "/test/this")).expandedParts.head());
+		assertTrue (matcher.matches(servletRequest("GET", "/test/a/b/c")).matched);
+		assertEquals("a/b/c",matcher.matches(servletRequest("GET", "/test/a/b/c")).expandedParts.expandToPath());
+
+		assertFalse (matcher.matches(servletRequest("GET", "/testx/this")).matched);
 	}
 
 	private HttpRequest servletRequest(String method, String path) {

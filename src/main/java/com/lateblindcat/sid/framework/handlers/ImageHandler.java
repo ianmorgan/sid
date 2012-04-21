@@ -32,7 +32,7 @@ public class ImageHandler implements Handler {
 			}
 			catch (Exception ex){
 				response = PageResponseFactory.internalError();
-				ex.printStackTrace();
+				//ex.printStackTrace();
 			}
 			return response;
 		}

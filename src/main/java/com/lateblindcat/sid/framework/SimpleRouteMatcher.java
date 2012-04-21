@@ -39,12 +39,24 @@ public class SimpleRouteMatcher {
 			if (!routeParts.isEmpty() && !requestParts.isEmpty()) {		
 				if (routeParts.head().equals("*")){
 					matchedParts = matchedParts.append(requestParts.head());
+					requestParts = requestParts.tail();
+				}
+				else if (routeParts.head().equals("**")){
+					// TODO: this is a very simple globbing rule that 
+					// assumes the ** is at the end of the param list
+					while (!requestParts.isEmpty()){
+						matchedParts = matchedParts.append(requestParts.head());
+						requestParts = requestParts.tail();			
+					}
 				}
 				else if (!requestParts.head().equals(routeParts.head())) {
 					break;
 				}
+				else {
+					requestParts = requestParts.tail();
+				}
 				routeParts = routeParts.tail();
-				requestParts = requestParts.tail();
+		
 			}
 			else {
 				// have we consumed both sides of the list ?

@@ -53,6 +53,10 @@ public class PartsList implements Iterable<String> {
 		working.remove(0);
 		return new PartsList(working);
 	}
+	
+	public String last(){
+		return parts.get(parts.size()-1);
+	}
 
 	public PartsList append(String part) {
 		List<String> working = new ArrayList<String>(this.parts);

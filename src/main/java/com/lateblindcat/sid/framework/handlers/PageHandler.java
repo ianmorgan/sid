@@ -7,29 +7,31 @@ import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.SimpleRouteMatcher;
+import com.lateblindcat.sid.framework.pages.Page;
 import com.lateblindcat.sid.framework.pages.PageResponse;
-import com.lateblindcat.sid.snapins.Snapin;
 
-public class SnapinHandler implements Handler {
+public class PageHandler implements Handler  {
+	
+	private List<Page> pages;
 
-	private List<Snapin> snapins;
-
-	public SnapinHandler(List<Snapin> snapins) {
-		this.snapins = snapins;
+	public PageHandler(List<Page> pages) {
+		this.pages = pages;
 	}
 
-
+	
 	@Override
 	public PageResponse process(HttpRequest request, RequestData requestData) {
-		for (Snapin snapin : snapins) {
+		for (Page page : pages) {
 			RouteMatchResult matchResult = new SimpleRouteMatcher(new Route(
-					snapin.getRoute())).matches(request);
+					page.getRoute())).matches(request);
 			if (matchResult.matched) {
-				return snapin.process();
+				return page.process();
 			}
 		}
 
 		return null;
 	}
+
+	
 
 }

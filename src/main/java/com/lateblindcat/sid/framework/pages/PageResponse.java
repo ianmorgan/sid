@@ -15,6 +15,8 @@ public interface PageResponse {
 	
 	/**
 	 * The content to be returned, as a stream
+	 * 
+	 *
 	 * @return
 	 */
 	InputStream getContent();

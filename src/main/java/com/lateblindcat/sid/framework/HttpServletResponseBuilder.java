@@ -10,6 +10,7 @@ public class HttpServletResponseBuilder {
 
 	public static void fromPageResponse(HttpServletResponse httpServletResponse, PageResponse pageResponse)
 			throws IOException {
+		
 		byte[] buf = new byte[10000];
 		int len = pageResponse.getContent().read(buf);
 		httpServletResponse.getOutputStream().write(buf, 0, len);

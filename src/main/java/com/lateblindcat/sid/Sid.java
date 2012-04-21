@@ -16,7 +16,11 @@ import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.HttpServletResponseBuilder;
 import com.lateblindcat.sid.framework.handlers.Handler;
 import com.lateblindcat.sid.framework.handlers.ImageHandler;
+import com.lateblindcat.sid.framework.handlers.PageHandler;
 import com.lateblindcat.sid.framework.handlers.SnapinHandler;
+import com.lateblindcat.sid.framework.handlers.TemplateHandler;
+import com.lateblindcat.sid.framework.pages.HomePage;
+import com.lateblindcat.sid.framework.pages.Page;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.snapins.DemoSnapin;
 import com.lateblindcat.sid.snapins.Snapin;
@@ -29,7 +33,9 @@ public class Sid extends AbstractHandler {
 		List<Handler> handlers = new ArrayList<Handler>();
 
 		handlers.add(new ImageHandler());
+		handlers.add(new TemplateHandler());
 		handlers.add(buildSnapins());
+		handlers.add(buildPageHandlers());
 
 		HttpRequest request = new HttpRequest(httpServletRequest);
 
@@ -51,6 +57,15 @@ public class Sid extends AbstractHandler {
 			httpServletResponse.getWriter().println("<h1>Page not found...</h1>");
 		}
 		// }
+	}
+
+	private Handler buildPageHandlers() {
+		// TODO: some form of auto registration based on package 
+		// or using annotations
+		List<Page> pages = new ArrayList<Page>();
+		pages.add(new HomePage());
+
+		return new PageHandler(pages);
 	}
 
 	private Handler buildSnapins() {

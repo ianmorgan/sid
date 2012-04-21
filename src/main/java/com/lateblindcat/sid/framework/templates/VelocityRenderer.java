@@ -1,0 +1,57 @@
+package com.lateblindcat.sid.framework.templates;
+
+import java.io.StringWriter;
+import java.util.Date;
+
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
+
+import com.lateblindcat.sid.framework.Renderer;
+import com.lateblindcat.sid.framework.StringExpression;
+import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.exception.NotFoundException;
+import com.lateblindcat.sid.framework.exception.ParserException;
+import com.lateblindcat.sid.framework.exception.ProcessingException;
+
+/**
+ * Velocity template integration
+ * 
+ * @author Ian Morgan
+ * 
+ */
+public class VelocityRenderer implements Renderer {
+
+	public VelocityRenderer() {
+		org.apache.velocity.app.Velocity.init();
+	}
+
+	@Override
+	public StringExpression render(StringExpression templateName) {
+
+		VelocityContext context = new VelocityContext();
+		context.put("name", new String("Velocity"));
+		context.put("now", new Date());
+		Template template = null;
+
+		String name = null;
+		try {
+			name = templateName.evalute();
+			template = Velocity.getTemplate(name);
+			StringWriter sw = new StringWriter();
+			template.merge(context, sw);
+			return StringExpressionFactory.fromStringWriter(sw);
+		} catch (ResourceNotFoundException rnfe) {
+			throw new NotFoundException("Velocity", name);
+		} catch (ParseErrorException pee) {
+			throw new ParserException(pee.getMessage());
+		} catch (MethodInvocationException mie) {
+			throw new ProcessingException(mie.getMessage());
+		} catch (Exception e) {
+			throw new ProcessingException(e.getMessage());
+		}
+	}
+}

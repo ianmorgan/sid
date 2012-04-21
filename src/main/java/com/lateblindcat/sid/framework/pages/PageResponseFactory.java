@@ -3,6 +3,7 @@ package com.lateblindcat.sid.framework.pages;
 import java.io.InputStream;
 
 import com.lateblindcat.sid.framework.ResponseCode;
+import com.lateblindcat.sid.framework.StringExpression;
 
 /**
  * 
@@ -18,6 +19,10 @@ public class PageResponseFactory {
 		return new PageResponseImpl(html, "text/html");
 	}
 	
+	public static PageResponse html(StringExpression html) {
+		return new PageResponseImpl(html.evalute(), "text/html");
+	}
+
 	public static PageResponse text(String text) {
 		return new PageResponseImpl(text, "text/plain");
 	}
