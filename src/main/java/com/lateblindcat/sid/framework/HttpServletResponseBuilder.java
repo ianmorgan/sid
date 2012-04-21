@@ -8,8 +8,7 @@ import com.lateblindcat.sid.framework.pages.PageResponse;
 
 public class HttpServletResponseBuilder {
 
-	public static void fromPageResponse(
-			HttpServletResponse httpServletResponse, PageResponse pageResponse)
+	public static void fromPageResponse(HttpServletResponse httpServletResponse, PageResponse pageResponse)
 			throws IOException {
 		byte[] buf = new byte[10000];
 		int len = pageResponse.getContent().read(buf);
@@ -20,8 +19,7 @@ public class HttpServletResponseBuilder {
 
 		if (pageResponse.isInline()) {
 			httpServletResponse.addHeader("content-disposition", "inline");
-			httpServletResponse.addHeader("content-length",
-					Integer.toString(len));
+			httpServletResponse.addHeader("content-length", Integer.toString(len));
 		}
 	}
 

@@ -13,55 +13,54 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import com.lateblindcat.sid.framework.HttpRequest;
-import com.lateblindcat.sid.framework.ResponseCode;
+import com.lateblindcat.sid.framework.HttpServletResponseBuilder;
+import com.lateblindcat.sid.framework.handlers.Handler;
 import com.lateblindcat.sid.framework.handlers.ImageHandler;
+import com.lateblindcat.sid.framework.handlers.SnapinHandler;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.snapins.DemoSnapin;
 import com.lateblindcat.sid.snapins.Snapin;
-import com.lateblindcat.sid.snapins.SnapinHandler;
 
 public class Sid extends AbstractHandler {
-	public void handle(String target, Request baseRequest,
-			HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	public void handle(String target, Request baseRequest, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException, ServletException {
 
+		// Build a list of handlers
+		List<Handler> handlers = new ArrayList<Handler>();
+
+		handlers.add(new ImageHandler());
+		handlers.add(buildSnapins());
+
+		HttpRequest request = new HttpRequest(httpServletRequest);
+
+		for (Handler handler : handlers) {
+			PageResponse pageResponse = handler.process(request, null);
+
+			if (pageResponse != null) {
+				HttpServletResponseBuilder.fromPageResponse(httpServletResponse, pageResponse);
+				baseRequest.setHandled(true);
+				break;
+			}
+		}
+
+		if (!baseRequest.isHandled()) {
+			httpServletResponse.setContentType("text/html;charset=utf-8");
+			httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+			baseRequest.setHandled(true);
+
+			httpServletResponse.getWriter().println("<h1>Page not found...</h1>");
+		}
+		// }
+	}
+
+	private Handler buildSnapins() {
+		// TODO: some form of auto registration based on package 
+		// or using annotations
 		List<Snapin> snapins = new ArrayList<Snapin>();
 		snapins.add(new DemoSnapin());
 
-		SnapinHandler runner = new SnapinHandler(snapins);
+		return new SnapinHandler(snapins);
 
-		if (!runner.handle(baseRequest, request, response)) {
-
-			ImageHandler imageHandler = new ImageHandler();
-			PageResponse pageResponse = imageHandler.process(new HttpRequest(
-					request), null);
-
-			if (pageResponse != null) {
-				if (pageResponse.getStatus().equals(ResponseCode.SC_OK)) {
-					byte[] buf = new byte[10000];
-					int len = pageResponse.getContent().read(buf);
-					response.getOutputStream().write(buf, 0, len);
-					response.setStatus(pageResponse.getStatus().getHttpCode());
-					response.setContentType(pageResponse.getContentType());
-
-					if (pageResponse.isInline()) {
-						response.addHeader("content-disposition", "inline");
-						response.addHeader("content-length",
-								Integer.toString(len));
-					}
-				} else {
-					response.setStatus(pageResponse.getStatus().getHttpCode());
-				}
-				baseRequest.setHandled(true);
-
-			} else {
-				response.setContentType("text/html;charset=utf-8");
-				response.setStatus(HttpServletResponse.SC_OK);
-				baseRequest.setHandled(true);
-
-				response.getWriter().println("<h1>Hello World!</h1>");
-			}
-		}
 	}
 
 	public static void main(String[] args) throws Exception {
