@@ -108,7 +108,6 @@ text-decoration: none;
 #topmenu a:hover {
 color: rgb(254,254,0);
 background-color: rgb(185,57,148);
-/*text-decoration: underline;*/
 }
 
 
@@ -121,7 +120,6 @@ background-color: rgb(185,57,148);
 	margin-left:10px;
 	margin-top:20px;
 	color:rgb(254,100,196);
-	background-color: rgb(254,254,0);
 	background-color: rgb(254,254,0);	
 	
 }
@@ -131,5 +129,10 @@ background-color: rgb(185,57,148);
 		font-weight: bold;
 		text-decoration: none;
 		background-color: rgb(254,254,0);
+		
+}
+
+#open-console a:hover {
+		color: rgb(185,57,148);
 		
 }
