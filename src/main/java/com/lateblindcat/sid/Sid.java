@@ -14,6 +14,7 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.HttpServletResponseBuilder;
+import com.lateblindcat.sid.framework.handlers.CSSHandler;
 import com.lateblindcat.sid.framework.handlers.Handler;
 import com.lateblindcat.sid.framework.handlers.ImageHandler;
 import com.lateblindcat.sid.framework.handlers.PageHandler;
@@ -34,6 +35,7 @@ public class Sid extends AbstractHandler {
 
 		handlers.add(new ImageHandler());
 		handlers.add(new TemplateHandler());
+		handlers.add(new CSSHandler());
 		handlers.add(buildSnapins());
 		handlers.add(buildPageHandlers());
 
@@ -60,7 +62,7 @@ public class Sid extends AbstractHandler {
 	}
 
 	private Handler buildPageHandlers() {
-		// TODO: some form of auto registration based on package 
+		// TODO: some form of auto registration based on package
 		// or using annotations
 		List<Page> pages = new ArrayList<Page>();
 		pages.add(new HomePage());
@@ -69,7 +71,7 @@ public class Sid extends AbstractHandler {
 	}
 
 	private Handler buildSnapins() {
-		// TODO: some form of auto registration based on package 
+		// TODO: some form of auto registration based on package
 		// or using annotations
 		List<Snapin> snapins = new ArrayList<Snapin>();
 		snapins.add(new DemoSnapin());

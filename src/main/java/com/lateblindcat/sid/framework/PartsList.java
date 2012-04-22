@@ -8,10 +8,18 @@ import java.util.List;
 
 /**
  * 
- * A immutable list for holding and manipulating the parts (tokens) in an Http
+ * <p>
+ * A Immutable list for holding and manipulating the parts (tokens) in an Http
  * Request. Naming conventions and behaviours are based on Scala.
+ * </p>
  * 
- * Note that the current implementation is simplistic and not optimised.
+ * <p>
+ * <i>Note: The current implementation is simplistic and not optimised.</i>
+ * </p>
+ * 
+ * <p>
+ * <i>Note: Consider implement using generics.</i>
+ * </p>
  * 
  * @author Ian Morgan
  * 
@@ -53,9 +61,9 @@ public class PartsList implements Iterable<String> {
 		working.remove(0);
 		return new PartsList(working);
 	}
-	
-	public String last(){
-		return parts.get(parts.size()-1);
+
+	public String last() {
+		return parts.get(parts.size() - 1);
 	}
 
 	public PartsList append(String part) {
@@ -63,14 +71,13 @@ public class PartsList implements Iterable<String> {
 		working.add(part);
 		return new PartsList(working);
 	}
-	
+
 	/**
-	 * Takes the parts and turn into a path for use 
-	 * http request.
+	 * Takes the parts and turn into a path for use in http request 
 	 * 
 	 * @return
 	 */
-	public String expandToPath(){
+	public String expandToPath() {
 		return toString();
 	}
 
