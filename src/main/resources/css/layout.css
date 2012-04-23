@@ -47,19 +47,22 @@ padding-left: 0;
 }
 
 #nav li {
-font-size: 80%;
-border-bottom: 1px dotted #B2BCC6;
+font-size: 90%;
 margin-bottom: 0.3em;
+width:10em;
+background-color: rgb(254,100,196);
+
 }
 
 #nav a:link, #nav a:visited {
 text-decoration: none;
-color: #2A4F6F;
-background-color: transparent;
+color: rgb(254,254,0);;
+background-color: rgb(254,100,196);
+width:10em;
 }
 
 #nav a:hover {
-color: #778899;
+color: #000000;
 }
 
 

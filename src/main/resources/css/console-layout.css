@@ -1,0 +1,17 @@
+
+#topmenu {
+
+top:1em;
+left:50em;
+
+}
+
+
+#topmenu a:link, #topmenu a:visited {
+padding: 3px;
+margin: 3px;
+font: 14px/1.2em "Museo Sans",Verdana,Arial,Helvetica,sans-serif;
+_color: rgb(89,74,55);
+font-weight:bold;
+}
+

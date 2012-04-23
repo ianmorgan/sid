@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringWriter;
 
 import com.lateblindcat.sid.framework.exception.NotFoundException;
@@ -22,7 +23,21 @@ public class StringExpressionFactory {
 	}
 
 	public static StringExpression fromInputStream(InputStream is) {
-		return new ObjectBasedStringExpression("TODO");
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			String s;
+			StringBuilder sb = new StringBuilder();
+			while ((s = br.readLine()) != null) {
+				sb.append(s);
+				sb.append("\n");
+			}
+			return new ObjectBasedStringExpression(sb);
+
+		} catch (FileNotFoundException e) {
+			throw new NotFoundException(e.getMessage());
+		} catch (IOException e) {
+			throw new ProcessingException("Error reading stream " + e.getMessage());
+		}
 	}
 
 	public static StringExpression fromFile(File f) {
