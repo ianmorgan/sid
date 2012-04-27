@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.Renderer;
 import com.lateblindcat.sid.framework.RequestData;
@@ -45,7 +46,7 @@ public class TemplateHandler implements Handler {
 				if (renderer != null) {
 					StringExpression rawContent = StringExpressionFactory.fromFile(new File(
 							"src/main/resources/templates/" + matchResult.expandedParts.expandToPath()));
-					StringExpression content = renderer.render(rawContent);
+					StringExpression content = renderer.render(new Context(), rawContent);
 					response = PageResponseFactory.html(content);
 				} else {
 					response = PageResponseFactory.html("unrecognized template type");

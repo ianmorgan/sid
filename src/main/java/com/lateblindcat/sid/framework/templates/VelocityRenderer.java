@@ -3,13 +3,13 @@ package com.lateblindcat.sid.framework.templates;
 import java.io.StringWriter;
 import java.util.Date;
 
-import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
+import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.Renderer;
 import com.lateblindcat.sid.framework.StringExpression;
 import com.lateblindcat.sid.framework.StringExpressionFactory;
@@ -30,12 +30,10 @@ public class VelocityRenderer implements Renderer {
 	}
 
 	@Override
-	public StringExpression render(StringExpression template) {
+	public StringExpression render(Context ctx, StringExpression template) {
 
-		VelocityContext context = new VelocityContext();
-		context.put("name", new String("Velocity"));
-		context.put("now", new Date());
-
+		VelocityContext context = ctx.toVelocity();
+	
 		String name = null;
 		try {
 			// TODO - should be cacheing template - see
@@ -43,7 +41,7 @@ public class VelocityRenderer implements Renderer {
 
 			String templateText = template.evalute();
 			StringWriter sw = new StringWriter();
-			Velocity.evaluate(context, sw, "wibble", templateText);
+			Velocity.evaluate(context, sw, "dont-care", templateText);
 			return StringExpressionFactory.fromStringWriter(sw);
 		} catch (ResourceNotFoundException rnfe) {
 			throw new NotFoundException("Velocity", name);

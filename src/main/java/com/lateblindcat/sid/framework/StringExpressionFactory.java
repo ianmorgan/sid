@@ -72,5 +72,10 @@ public class StringExpressionFactory {
 			return object.toString();
 		}
 
+		@Override
+		public String toString() {
+			return object.toString();
+		}
+
 	}
 }

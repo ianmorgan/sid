@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
@@ -42,7 +43,7 @@ public class ContentPageHandler implements Handler {
 		if (matchResult.matched) {
 			StringExpression rawContent = StringExpressionFactory.fromFile(new File(
 					"src/main/resources/templates/layout.vtl"));
-			String layout = new VelocityRenderer().render(rawContent).evalute();
+			String layout = new VelocityRenderer().render(new Context(),rawContent).evalute();
 
 			layout = mergeContentTemplate(matchResult, layout);
 
@@ -61,7 +62,7 @@ public class ContentPageHandler implements Handler {
 				rawContent = StringExpressionFactory.fromFile(new File("src/main/resources/templates/"
 						+ matchResult.expandedParts.expandToPath() + ".md"));
 
-				content = new MarkdownRenderer().render(rawContent).evalute();
+				content = new MarkdownRenderer().render(new Context(), rawContent).evalute();
 			} catch (ProcessingException ex) {
 				content = "<strong>Failed to load content:</strong> " + ex.getMessage();
 			}

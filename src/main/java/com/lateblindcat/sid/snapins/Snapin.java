@@ -1,5 +1,6 @@
 package com.lateblindcat.sid.snapins;
 
+import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 
 /**
@@ -20,7 +21,7 @@ public interface Snapin {
 	 * The route to match against
 	 * @return
 	 */
-	String getRoute();
+	Route getRoute();
 
 	PageResponse process();
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.HttpRequest;
 import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
@@ -25,26 +26,27 @@ public class SnapinHandler implements Handler {
 		this.snapins = snapins;
 	}
 
-
 	@Override
 	public PageResponse process(HttpRequest request, RequestData requestData) {
 		for (Snapin snapin : snapins) {
-			RouteMatchResult matchResult = new SimpleRouteMatcher(new Route(
-					snapin.getRoute())).matches(request);
+			RouteMatchResult matchResult = new SimpleRouteMatcher(snapin.getRoute()).matches(request);
 			if (matchResult.matched) {
-				
+
+				Context context = new Context(request);
+				context.setBean("snapins", snapins);
+
 				StringExpression rawContent = StringExpressionFactory.fromFile(new File(
 						"src/main/resources/templates/console-layout.vtl"));
-				String layout = new VelocityRenderer().render(rawContent).evalute();
-				
-				// TODO - this is too simplistic - we should be looking at 
-				// the content type to construct a suitable container (e.g what about an image) 
-				StringExpression snapinContent = StringExpressionFactory.fromInputStream(snapin.process().getContent());
+				String layout = new VelocityRenderer().render(context, rawContent).evalute();
 
+				// TODO - this is too simplistic - we should be looking at
+				// the content type to construct a suitable container (e.g what
+				// about an image)
+				StringExpression snapinContent = StringExpressionFactory.fromInputStream(snapin.process().getContent());
 				layout = StringUtils.replace(layout, "content-goes-here", snapinContent.evalute());
 
 				return PageResponseFactory.html(layout);
-				
+
 			}
 		}
 

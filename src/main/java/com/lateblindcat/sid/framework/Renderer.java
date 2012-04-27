@@ -8,6 +8,6 @@ package com.lateblindcat.sid.framework;
  */
 public interface Renderer {
 	
-	StringExpression render(StringExpression template); 
+	StringExpression render(Context context, StringExpression template); 
 
 }

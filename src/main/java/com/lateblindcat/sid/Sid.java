@@ -25,6 +25,7 @@ import com.lateblindcat.sid.framework.pages.HomePage;
 import com.lateblindcat.sid.framework.pages.Page;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.snapins.DemoSnapin;
+import com.lateblindcat.sid.snapins.DemoSnapin2;
 import com.lateblindcat.sid.snapins.Snapin;
 
 public class Sid extends AbstractHandler {
@@ -77,13 +78,14 @@ public class Sid extends AbstractHandler {
 		// or using annotations
 		List<Snapin> snapins = new ArrayList<Snapin>();
 		snapins.add(new DemoSnapin());
+		snapins.add(new DemoSnapin2());
 
 		return new SnapinHandler(snapins);
 
 	}
 
 	public static void main(String[] args) throws Exception {
-		Server server = new Server(8080);
+		Server server = new Server(80);
 		server.setHandler(new Sid());
 
 		server.start();

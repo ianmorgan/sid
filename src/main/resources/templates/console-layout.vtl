@@ -24,18 +24,12 @@
 		<div id="nav">
 				<span id="console-image">Console</span>
 			<ul>
-				<li>
-					<a href="#">Snap in One</a>
+		
+			#foreach( $snapin  in $snapins)
+    			<li>
+					<a href="$snapin.route.parts()">$snapin.name</a>
 				</li>
-				<li>
-					<a href="#">Snap in Two</a>
-				</li>
-				<li>
-					<a href="#">Snap In Three </a>
-				</li>
-				<li>
-					<a href="#">Snap in Four</a>
-				</li>
+			#end
 			</ul>
 		
 		</div>
