@@ -11,18 +11,27 @@ import javax.servlet.http.HttpServletRequest;
  * @author Ian Morgan
  * 
  */
-public class HttpRequest {
+public class Request {
 
-	public HttpRequest(HttpServletRequest req) {
+	private RequestType type;
+	private RequestPath path;
+
+	public Request(HttpServletRequest req) {
 		path = new RequestPath(req);
 		type = RequestType.fromString(req.getMethod());
 	}
 
-	public HttpRequest(HttpRequest matched, RequestPath remaining) {
+	public Request(Request matched, RequestPath remaining) {
 		path = remaining;
 		type = matched.type;
 	}
 
-	public RequestType type;
-	public RequestPath path;
+	public RequestType type() {
+		return type;
+	}
+
+	public RequestPath path() {
+		return path;
+	}
+
 }

@@ -17,6 +17,6 @@ public class LessRendererTest {
 				StringExpressionFactory.fromString("div { width: 1 + 1 }"));
 
 		String expected = "div {\n" + "  width: 2;\n" + "}\n";
-		assertEquals(expected, css.evalute());
+		assertEquals(expected, css.eval());
 	}
 }

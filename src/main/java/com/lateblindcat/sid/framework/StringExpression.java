@@ -15,5 +15,5 @@ package com.lateblindcat.sid.framework;
  */
 public interface StringExpression {
 
-	String evalute();
+	String eval();
 }

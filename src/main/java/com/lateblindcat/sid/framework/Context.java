@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.velocity.VelocityContext;
 
 /**
- * A generalised class for passing data into a template for evaluation
+ * A generalized class for passing data into a template for evaluation
  * 
  * @author Ian Morgan
  * 
@@ -18,15 +18,13 @@ public class Context {
 
 	public Context() {
 		this.data = new HashMap<String, Object>();
-	}
-	
-	public Context(HttpRequest request) {
-		this.data = new HashMap<String, Object>();
-		
-		// TODO -really should make an immutable copy here 
-		setBean("request",request);
+		setBean("now", new Date());
 	}
 
+	public Context(Request request) {
+		this();
+		setBean("request", request);
+	}
 
 	public void setBean(String beanName, Object bean) {
 		data.put(beanName, bean);
@@ -34,7 +32,6 @@ public class Context {
 
 	public VelocityContext toVelocity() {
 		VelocityContext context = new VelocityContext();
-		context.put("now", new Date());
 
 		for (String beanName : data.keySet()) {
 			context.put(beanName, data.get(beanName));

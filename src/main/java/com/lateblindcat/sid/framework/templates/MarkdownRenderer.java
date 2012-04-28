@@ -11,7 +11,7 @@ public class MarkdownRenderer implements Renderer {
 	@Override
 	public StringExpression render(Context context, StringExpression template) {
 		MarkdownProcessor processor = new MarkdownProcessor();
-		return StringExpressionFactory.fromString(processor.markdown(template.evalute()));
+		return StringExpressionFactory.fromString(processor.markdown(template.eval()));
 	}
 
 }

@@ -17,7 +17,7 @@ public class LessRenderer implements Renderer {
 	public StringExpression render(Context context, StringExpression template) {
 		String css;
 		try {
-			css = engine.compile(template.evalute());
+			css = engine.compile(template.eval());
 		} catch (LessException e) {
 			throw new ParseErrorException(e.getMessage());
 		}

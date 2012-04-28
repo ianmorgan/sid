@@ -21,7 +21,7 @@ public class PageResponseFactory {
 	}
 
 	public static PageResponse html(StringExpression html) {
-		return new PageResponseImpl(html.evalute(), "text/html");
+		return new PageResponseImpl(html.eval(), "text/html");
 	}
 
 	public static PageResponse text(String text) {

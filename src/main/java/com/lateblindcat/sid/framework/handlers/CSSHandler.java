@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import com.lateblindcat.sid.framework.HttpRequest;
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
@@ -17,7 +17,7 @@ public class CSSHandler implements Handler {
 	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher(new Route("GET:/resources/css/**"));
 	
 	@Override
-	public PageResponse process(HttpRequest request, RequestData requestData) {
+	public PageResponse process(Request request, RequestData requestData) {
 		RouteMatchResult matchResult = routeMatcher.matches(request);
 	
 		if (matchResult.matched){

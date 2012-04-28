@@ -2,7 +2,7 @@ package com.lateblindcat.sid.framework.handlers;
 
 import java.util.List;
 
-import com.lateblindcat.sid.framework.HttpRequest;
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
@@ -20,7 +20,7 @@ public class PageHandler implements Handler  {
 
 	
 	@Override
-	public PageResponse process(HttpRequest request, RequestData requestData) {
+	public PageResponse process(Request request, RequestData requestData) {
 		for (Page page : pages) {
 			RouteMatchResult matchResult = new SimpleRouteMatcher(new Route(
 					page.getRoute())).matches(request);

@@ -24,7 +24,7 @@ public class VelocityRendererTest {
 
 		context.setBean("name", "John Smith");
 		assertEquals("Hello, John Smith", renderer.render(context, StringExpressionFactory.fromString("Hello, $name"))
-				.evalute());
+				.eval());
 
 	}
 

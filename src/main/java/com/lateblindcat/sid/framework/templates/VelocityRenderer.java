@@ -39,7 +39,7 @@ public class VelocityRenderer implements Renderer {
 			// TODO - should be cacheing template - see
 			// http://stackoverflow.com/questions/1432468/how-to-use-string-as-velocity-template
 
-			String templateText = template.evalute();
+			String templateText = template.eval();
 			StringWriter sw = new StringWriter();
 			Velocity.evaluate(context, sw, "dont-care", templateText);
 			return StringExpressionFactory.fromStringWriter(sw);

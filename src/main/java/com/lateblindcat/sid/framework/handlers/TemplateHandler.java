@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 
 import com.lateblindcat.sid.framework.Context;
-import com.lateblindcat.sid.framework.HttpRequest;
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.Renderer;
 import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
@@ -23,7 +23,7 @@ public class TemplateHandler implements Handler {
 	private TemplateEngine templateEngine = new TemplateEngine();
 
 	@Override
-	public PageResponse process(HttpRequest request, RequestData requestData) {
+	public PageResponse process(Request request, RequestData requestData) {
 		RouteMatchResult matchResult = routeMatcher.matches(request);
 
 		if (matchResult.matched) {

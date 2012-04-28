@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.lateblindcat.sid.framework.Context;
-import com.lateblindcat.sid.framework.HttpRequest;
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
@@ -27,7 +27,7 @@ public class SnapinHandler implements Handler {
 	}
 
 	@Override
-	public PageResponse process(HttpRequest request, RequestData requestData) {
+	public PageResponse process(Request request, RequestData requestData) {
 		for (Snapin snapin : snapins) {
 			RouteMatchResult matchResult = new SimpleRouteMatcher(snapin.getRoute()).matches(request);
 			if (matchResult.matched) {
@@ -37,13 +37,13 @@ public class SnapinHandler implements Handler {
 
 				StringExpression rawContent = StringExpressionFactory.fromFile(new File(
 						"src/main/resources/templates/console-layout.vtl"));
-				String layout = new VelocityRenderer().render(context, rawContent).evalute();
+				String layout = new VelocityRenderer().render(context, rawContent).eval();
 
 				// TODO - this is too simplistic - we should be looking at
 				// the content type to construct a suitable container (e.g what
 				// about an image)
 				StringExpression snapinContent = StringExpressionFactory.fromInputStream(snapin.process().getContent());
-				layout = StringUtils.replace(layout, "content-goes-here", snapinContent.evalute());
+				layout = StringUtils.replace(layout, "content-goes-here", snapinContent.eval());
 
 				return PageResponseFactory.html(layout);
 

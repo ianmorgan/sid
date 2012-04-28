@@ -5,7 +5,7 @@ import java.io.File;
 import org.apache.commons.lang.StringUtils;
 
 import com.lateblindcat.sid.framework.Context;
-import com.lateblindcat.sid.framework.HttpRequest;
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
@@ -37,13 +37,13 @@ public class ContentPageHandler implements Handler {
 	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher(new Route("GET:/content/**"));
 
 	@Override
-	public PageResponse process(HttpRequest request, RequestData requestData) {
+	public PageResponse process(Request request, RequestData requestData) {
 		RouteMatchResult matchResult = routeMatcher.matches(request);
 
 		if (matchResult.matched) {
 			StringExpression rawContent = StringExpressionFactory.fromFile(new File(
 					"src/main/resources/templates/layout.vtl"));
-			String layout = new VelocityRenderer().render(new Context(),rawContent).evalute();
+			String layout = new VelocityRenderer().render(new Context(),rawContent).eval();
 
 			layout = mergeContentTemplate(matchResult, layout);
 
@@ -62,7 +62,7 @@ public class ContentPageHandler implements Handler {
 				rawContent = StringExpressionFactory.fromFile(new File("src/main/resources/templates/"
 						+ matchResult.expandedParts.expandToPath() + ".md"));
 
-				content = new MarkdownRenderer().render(new Context(), rawContent).evalute();
+				content = new MarkdownRenderer().render(new Context(), rawContent).eval();
 			} catch (ProcessingException ex) {
 				content = "<strong>Failed to load content:</strong> " + ex.getMessage();
 			}

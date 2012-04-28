@@ -1,10 +1,10 @@
 package com.lateblindcat.sid.framework.handlers;
 
 import com.lateblindcat.sid.framework.RequestData;
-import com.lateblindcat.sid.framework.HttpRequest;
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 
 public interface Handler {
 
-	PageResponse process (HttpRequest route, RequestData requestData);
+	PageResponse process (Request route, RequestData requestData);
 }

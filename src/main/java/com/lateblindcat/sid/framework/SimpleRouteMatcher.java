@@ -26,12 +26,12 @@ public class SimpleRouteMatcher {
 		this.route = route;
 	}
 
-	public RouteMatchResult matches(HttpRequest request) {
+	public RouteMatchResult matches(Request request) {
 		RouteMatchResult result = new RouteMatchResult();
 
 		boolean matched = false;
 		PartsList routeParts = this.route.parts();
-		PartsList requestParts = request.path.getParts();
+		PartsList requestParts = request.path().getParts();
 		PartsList matchedParts = new PartsList();
 		
 		// TODO: This really could be quite a lot neater	

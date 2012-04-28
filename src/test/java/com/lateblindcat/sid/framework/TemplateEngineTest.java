@@ -1,8 +1,8 @@
 package com.lateblindcat.sid.framework;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class TemplateEngineTest {
 
@@ -19,7 +19,7 @@ public class TemplateEngineTest {
 		StringExpression template = StringExpressionFactory.fromString("## Hello, $name");
 		StringExpression rendered = engine.render(context, template, new String[] { "md","vtl" });
 
-		assertEquals ("<h2>Hello, John Smith</h2>\n", rendered.evalute());
+		assertEquals ("<h2>Hello, John Smith</h2>\n", rendered.eval());
 	}
 
 }

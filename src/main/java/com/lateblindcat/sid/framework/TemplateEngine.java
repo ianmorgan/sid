@@ -9,6 +9,7 @@ import com.lateblindcat.sid.framework.templates.MarkdownRenderer;
 import com.lateblindcat.sid.framework.templates.VelocityRenderer;
 
 /**
+ * Provides access to all registered template engines such as velocity, markdown
  * 
  * 
  * @author Ian Morgan
@@ -25,6 +26,24 @@ public class TemplateEngine {
 		RENDERERS.put("less", new LessRenderer());
 	}
 
+	/**
+	 * <p>
+	 * Renders the provided content using the template engines registered
+	 * against the extensions. Throws a {@link ProcessingException} (or
+	 * subclass) if there is a problem.
+	 * </p>
+	 * 
+	 * <p>
+	 * If there are multiple extensions then content is simply passed through
+	 * each templating engine in turn
+	 * </p>
+	 * 
+	 * 
+	 * @param context
+	 * @param content
+	 * @param extensions
+	 * @return
+	 */
 	public StringExpression render(Context context, StringExpression content, String[] extensions) {
 		StringExpression rendered = content;
 		for (String ext : extensions) {

@@ -12,7 +12,7 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
-import com.lateblindcat.sid.framework.HttpRequest;
+
 import com.lateblindcat.sid.framework.HttpServletResponseBuilder;
 import com.lateblindcat.sid.framework.handlers.CSSHandler;
 import com.lateblindcat.sid.framework.handlers.ContentPageHandler;
@@ -42,7 +42,7 @@ public class Sid extends AbstractHandler {
 		handlers.add(buildSnapins());
 		handlers.add(buildPageHandlers());
 
-		HttpRequest request = new HttpRequest(httpServletRequest);
+		com.lateblindcat.sid.framework.Request request = new com.lateblindcat.sid.framework.Request(httpServletRequest);
 
 		for (Handler handler : handlers) {
 			PageResponse pageResponse = handler.process(request, null);

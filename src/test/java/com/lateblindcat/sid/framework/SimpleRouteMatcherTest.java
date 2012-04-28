@@ -61,11 +61,11 @@ public class SimpleRouteMatcherTest {
 		assertFalse (matcher.matches(servletRequest("GET", "/testx/this")).matched);
 	}
 
-	private HttpRequest servletRequest(String method, String path) {
+	private Request servletRequest(String method, String path) {
 		MockHttpServletRequest servletRequest = new MockHttpServletRequest();
 		servletRequest.setPathInfo(path);
 		servletRequest.setMethod(method);
-		HttpRequest request = new HttpRequest (servletRequest);
+		Request request = new Request (servletRequest);
 		return request;
 	}
 

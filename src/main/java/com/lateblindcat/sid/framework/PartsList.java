@@ -10,7 +10,7 @@ import java.util.List;
  * 
  * <p>
  * A Immutable list for holding and manipulating the parts (tokens) in an Http
- * Request. Naming conventions and behaviours are based on Scala.
+ * Request. Naming conventions and behaviors are based on Scala.
  * </p>
  * 
  * <p>

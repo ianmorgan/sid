@@ -68,7 +68,7 @@ public class StringExpressionFactory {
 		}
 
 		@Override
-		public String evalute() {
+		public String eval() {
 			return object.toString();
 		}
 
