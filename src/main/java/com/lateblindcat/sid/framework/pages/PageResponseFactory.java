@@ -40,8 +40,8 @@ public class PageResponseFactory {
 		return new PageResponseImpl(ResponseCode.SC_INTERNAL_SERVER_ERROR);
 	}
 
-	public static PageResponse css(FileInputStream fis) {
-		return new PageResponseImpl(fis, "text/css");
+	public static PageResponse css(StringExpression css) {
+		return new PageResponseImpl(css.eval(), "text/css");
 	}
 
 }

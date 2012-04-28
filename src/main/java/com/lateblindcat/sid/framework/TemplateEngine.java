@@ -9,7 +9,10 @@ import com.lateblindcat.sid.framework.templates.MarkdownRenderer;
 import com.lateblindcat.sid.framework.templates.VelocityRenderer;
 
 /**
+ * <p>
  * Provides access to all registered template engines such as velocity, markdown
+ * etc.
+ * </p>
  * 
  * 
  * @author Ian Morgan

@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.Request;
-import com.lateblindcat.sid.framework.Renderer;
 import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
@@ -16,7 +15,20 @@ import com.lateblindcat.sid.framework.TemplateEngine;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 
-public class TemplateHandler implements Handler {
+/**
+ * <p>
+ * A handler to render any template in the template directory as HTML.
+ * </p>
+ * 
+ * <p>
+ * TODO: These templates are also shared with with other handlers. Maybe they
+ * should be split into public and private ?
+ * </p>
+ * 
+ * @author Ian Morgan
+ * 
+ */
+public class TemplateHandler extends BaseHandler implements Handler {
 
 	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher(new Route("GET:/templates/**"));
 
@@ -29,20 +41,14 @@ public class TemplateHandler implements Handler {
 		if (matchResult.matched) {
 			PageResponse response;
 			try {
-				String[] parts = matchResult.expandedParts.last().split("\\.");
+				String[] templates = this.fileExtensions(matchResult.expandedParts.last());
 
-				if (parts.length >= 2) {
-					String[] templates = Arrays.copyOfRange(parts, 1, parts.length);
+				StringExpression rawContent = StringExpressionFactory.fromFile(new File("src/main/resources/templates/"
+						+ matchResult.expandedParts.expandToPath()));
 
-					StringExpression rawContent = StringExpressionFactory.fromFile(new File(
-							"src/main/resources/templates/" + matchResult.expandedParts.expandToPath()));
+				StringExpression rendered = templateEngine.render(new Context(request), rawContent, templates);
+				response = PageResponseFactory.html(rendered);
 
-					StringExpression rendered = templateEngine.render(new Context(request), rawContent, templates);
-
-					response = PageResponseFactory.html(rendered);
-				} else {
-					response = PageResponseFactory.html("unrecognized template type");
-				}
 			} catch (RuntimeException re) {
 				response = PageResponseFactory.notFound();
 			}

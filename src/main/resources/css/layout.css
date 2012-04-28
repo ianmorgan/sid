@@ -1,11 +1,15 @@
-/*
-
-color: rgb(89,74,55);
-color: rgb(254,100,196);
-color: rgb(254,254,0);	
 
 
-*/
+@pink: rgb(254,100,196);
+@dark_pink: darken(@pink,20%);
+@yellow: rgb(254,254,0);
+@text: rgb(89,74,55);
+
+.border-radius (@radius: 5px) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
 
 body {
 margin: 0;
@@ -13,7 +17,7 @@ padding: 0;
 background: url("../../images/sid2.jpg") no-repeat fixed center
 130px #FFFFFF;
 font: 15px/1.4em  "Museo Sans",Verdana,Arial,Helvetica,sans-serif;
-color: rgb(89,74,55);
+color: @text;
 }
 
 p {
@@ -59,14 +63,14 @@ padding-left: 0;
 font-size: 90%;
 margin-bottom: 0.3em;
 width:10em;
-background-color: rgb(254,100,196);
+background-color: @pink;
 
 }
 
 #nav a:link, #nav a:visited {
 text-decoration: none;
-color: rgb(254,254,0);;
-background-color: rgb(254,100,196);
+color: rgb(254,254,0);
+background-color: @pink;
 width:10em;
 }
 
@@ -108,18 +112,21 @@ padding-left: 1.2em;
 
 #topmenu a:link, #topmenu a:visited {
 display: inline;
-color: rgb(254,254,0);
-background-color: rgb(254,100,196);
+color: @yellow;
+background-color: @pink;
 padding: 5px;
 margin: 3px;
 font: 20px/1.8em "Museo Sans",Verdana,Arial,Helvetica,sans-serif;
 font-weight: bold;
 text-decoration: none;
+.border-radius;
 }
 
 #topmenu a:hover {
-color: rgb(254,254,0);
-background-color: rgb(185,57,148);
+color: @yellow;
+_background-color: rgb(185,57,148);
+background-color: @dark_pink;
+
 }
 
 
@@ -131,16 +138,16 @@ background-color: rgb(185,57,148);
 	padding:7px;
 	margin-left:10px;
 	margin-top:20px;
-	color:rgb(254,100,196);
-	background-color: rgb(254,254,0);	
+	color:@pink;
+	background-color: @yellow;	
 	
 }
 #open-console a:visited,#open-console a:link {
-		color:rgb(254,100,196);
+		color:@pink;
 		font: 20px "Museo Sans",Verdana,Arial,Helvetica,sans-serif;
 		font-weight: bold;
 		text-decoration: none;
-		background-color: rgb(254,254,0);
+		background-color: @yellow;
 		
 }
 
