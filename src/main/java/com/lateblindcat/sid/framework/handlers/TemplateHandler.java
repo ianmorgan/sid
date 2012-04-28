@@ -1,8 +1,7 @@
 package com.lateblindcat.sid.framework.handlers;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.HttpRequest;
@@ -13,22 +12,15 @@ import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.framework.StringExpression;
 import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.TemplateEngine;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
-import com.lateblindcat.sid.framework.templates.MarkdownRenderer;
-import com.lateblindcat.sid.framework.templates.VelocityRenderer;
 
 public class TemplateHandler implements Handler {
 
 	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher(new Route("GET:/templates/**"));
 
-	static Map<String, Renderer> renderers;
-	static {
-		renderers = new HashMap<String, Renderer>();
-		renderers.put("vtl", new VelocityRenderer());
-		renderers.put("md", new MarkdownRenderer());
-
-	}
+	private TemplateEngine templateEngine = new TemplateEngine();
 
 	@Override
 	public PageResponse process(HttpRequest request, RequestData requestData) {
@@ -38,16 +30,16 @@ public class TemplateHandler implements Handler {
 			PageResponse response;
 			try {
 				String[] parts = matchResult.expandedParts.last().split("\\.");
-				Renderer renderer = null;
-				if (parts.length == 2) {
-					String templateType = parts[1];
-					renderer = renderers.get(templateType);
-				}
-				if (renderer != null) {
+
+				if (parts.length >= 2) {
+					String[] templates = Arrays.copyOfRange(parts, 1, parts.length);
+
 					StringExpression rawContent = StringExpressionFactory.fromFile(new File(
 							"src/main/resources/templates/" + matchResult.expandedParts.expandToPath()));
-					StringExpression content = renderer.render(new Context(), rawContent);
-					response = PageResponseFactory.html(content);
+
+					StringExpression rendered = templateEngine.render(new Context(request), rawContent, templates);
+
+					response = PageResponseFactory.html(rendered);
 				} else {
 					response = PageResponseFactory.html("unrecognized template type");
 				}
