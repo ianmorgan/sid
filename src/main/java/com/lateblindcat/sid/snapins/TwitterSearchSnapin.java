@@ -46,7 +46,8 @@ public class TwitterSearchSnapin implements Snapin {
 
 			sb.append("<div><pre>results");
 			sb.append(("page " + result.getPage()));
-			for (Tweet tweet : result.getTweets()) {
+			for (Object t : result.getTweets()) {
+				Tweet tweet = (Tweet)t;
 				sb.append("\n");
 				sb.append(tweet.getCreatedAt() + " - " + tweet.getFromUser() + ":" + tweet.getText() + ":"
 						+ tweet.getLocation());
