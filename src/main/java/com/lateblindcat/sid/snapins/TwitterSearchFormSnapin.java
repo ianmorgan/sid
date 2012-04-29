@@ -1,0 +1,30 @@
+package com.lateblindcat.sid.snapins;
+
+import com.lateblindcat.sid.framework.Route;
+import com.lateblindcat.sid.framework.forms.FormBuilder;
+import com.lateblindcat.sid.framework.forms.SubmitButton;
+import com.lateblindcat.sid.framework.forms.TextField;
+import com.lateblindcat.sid.framework.pages.PageResponse;
+import com.lateblindcat.sid.framework.pages.PageResponseFactory;
+
+public class TwitterSearchFormSnapin implements Snapin {
+
+	@Override
+	public String getName() {
+		return "Twitter Search Form";
+	}
+
+	@Override
+	public Route getRoute() {
+		return new Route("GET:/twittersearchform");
+	}
+
+	@Override
+	public PageResponse process() {
+		FormBuilder builder = new FormBuilder("test", "GET", "/twitterseacrh");
+		builder.with(new TextField("search")).with(new SubmitButton("submit"));
+		
+		return PageResponseFactory.html(builder.render(null));
+	}
+
+}

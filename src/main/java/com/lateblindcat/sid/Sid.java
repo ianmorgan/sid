@@ -12,7 +12,6 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
-
 import com.lateblindcat.sid.framework.HttpServletResponseBuilder;
 import com.lateblindcat.sid.framework.handlers.CSSHandler;
 import com.lateblindcat.sid.framework.handlers.ContentPageHandler;
@@ -27,6 +26,8 @@ import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.snapins.DemoSnapin;
 import com.lateblindcat.sid.snapins.DemoSnapin2;
 import com.lateblindcat.sid.snapins.Snapin;
+import com.lateblindcat.sid.snapins.TwitterSearchFormSnapin;
+import com.lateblindcat.sid.snapins.TwitterSearchSnapin;
 
 public class Sid extends AbstractHandler {
 	public void handle(String target, Request baseRequest, HttpServletRequest httpServletRequest,
@@ -79,6 +80,8 @@ public class Sid extends AbstractHandler {
 		List<Snapin> snapins = new ArrayList<Snapin>();
 		snapins.add(new DemoSnapin());
 		snapins.add(new DemoSnapin2());
+		snapins.add(new TwitterSearchFormSnapin());
+		snapins.add(new TwitterSearchSnapin());
 
 		return new SnapinHandler(snapins);
 

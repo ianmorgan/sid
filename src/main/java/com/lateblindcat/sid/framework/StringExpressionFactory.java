@@ -17,6 +17,10 @@ public class StringExpressionFactory {
 	public static StringExpression fromString(String data) {
 		return new ObjectBasedStringExpression(data);
 	}
+	
+	public static StringExpression fromString(StringBuilder sb) {
+		return fromString(sb.toString());
+	}
 
 	public static StringExpression fromStringWriter(StringWriter data) {
 		return new ObjectBasedStringExpression(data);
@@ -78,4 +82,5 @@ public class StringExpressionFactory {
 		}
 
 	}
+
 }
