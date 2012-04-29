@@ -15,10 +15,12 @@ public class Request {
 
 	private RequestType type;
 	private RequestPath path;
+	private Params params;
 
 	public Request(HttpServletRequest req) {
 		path = new RequestPath(req);
 		type = RequestType.fromString(req.getMethod());
+		params = new Params(req);
 	}
 
 	public Request(Request matched, RequestPath remaining) {
@@ -29,7 +31,13 @@ public class Request {
 	public RequestType type() {
 		return type;
 	}
+	
+	public Params params() {
+		return params;
+	}
 
+	// better be use params
+	@Deprecated
 	public RequestPath path() {
 		return path;
 	}

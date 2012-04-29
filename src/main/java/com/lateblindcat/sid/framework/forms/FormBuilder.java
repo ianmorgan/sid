@@ -14,9 +14,8 @@ public class FormBuilder {
 
 	public FormBuilder(String name, String method, String action) {
 		this.attrs.put("name", name);
-		//this.attrs.put("method", method);
+		this.attrs.put("method", method);
 		this.attrs.put("action", action);
-
 	}
 
 	public FormBuilder with(FormComponent component) {

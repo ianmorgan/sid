@@ -6,10 +6,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.lateblindcat.sid.framework.Params.Param;
 
 /**
- * 
  * <p>
  * A Immutable list for holding and manipulating the request data (tokens) in an
  * Http Request.
@@ -19,32 +20,34 @@ import com.lateblindcat.sid.framework.Params.Param;
  * This does not follow the HttpServletRequest model that keep the request path
  * and it query paarms or submitted data separate. Instead, it is based on the
  * model used by Ruby on Rails whereby a request and it query parameters are
- * standardised into a number of tokens based on the route match and this values
+ * standardised into a number of tokens based on the route match and the values
  * in the query parameters.
+ * </p>
  * 
- * This makes it easy to deal with complex routes and params, as both are
- * handled in the same way. The example below make it a clearer:
+ * <p>
+ * This makes it easier to deal with complex routes and params, as both are
+ * handled in the same way. The example below make it clearer:
  * 
  * <pre>
  *  The route
- *       /account/show/:id
+ *       /account/:action/:id
  *       
- *  Can be matched by either 
- *       http://example.com/account/show/27
+ *  Can be matched by any of 
+ *       GET http://example.com/account/show/27
  *   or
- *       http://example.com/account/show?id=27
+ *       GET http://example.com/account/show?id=27
+ *   or
+ *       POST http://example.com/account/show  (with form data containing "id=27")
  *     
- *  In both cases there are three params
- * 
- * 
- * 
- * 
- * 
+ *  In all cases there are three params:
+ *       name    value
+ *       -----   -----
+ *       (null)  account
+ *       action  show
+ *       id      27
  * </pre>
  * 
  * </p>
- * 
- * 
  * 
  * <p>
  * <i>Note: The current implementation is simplistic and not optimised.</i>
@@ -60,11 +63,22 @@ import com.lateblindcat.sid.framework.Params.Param;
 public class Params implements Iterable<Param> {
 	private List<Param> parts;
 
-	public Params(Collection<String> params) {
-		this.parts = new ArrayList<Param>();
-		for (String param : params) {
-			parts.add(new Param(param));
+	public Params(HttpServletRequest req) {
+		String working = req.getPathInfo();
+		if (working.startsWith("/")) {
+			working = working.substring(1, working.length());
 		}
+
+		buildFromStringArray(working.split("/"));
+
+		for (String name : req.getParameterMap().keySet()) {
+			parts.add(new Param(name, req.getParameter(name)));
+		}
+		// return parts;
+	}
+
+	public Params(Collection<String> params) {
+		buildFromStringArray(params.toArray(new String[0]));
 	}
 
 	public Params(List<Param> params) {
@@ -133,6 +147,13 @@ public class Params implements Iterable<Param> {
 		return sb.toString();
 	}
 
+	private void buildFromStringArray(String[] params) {
+		this.parts = new ArrayList<Param>();
+		for (String param : params) {
+			parts.add(new Param(param));
+		}
+	}
+
 	public class Param {
 		public Param(String value) {
 			this.value = value;
@@ -145,5 +166,14 @@ public class Params implements Iterable<Param> {
 
 		public String value;
 		public String name;
+	}
+
+	public Param named(String name) {
+		for (Param param : parts) {
+			if (name.equals(param.name)) {
+				return param;
+			}
+		}
+		return null;
 	}
 }

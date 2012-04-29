@@ -29,22 +29,29 @@ public class TwitterSearchSnapin implements Snapin {
 
 		// The factory instance is re-useable and thread safe.
 		Twitter twitter = new TwitterFactory().getInstance();
-		Query query = new Query("dartford");
+		String q = "dartford";
+		if (request.params().named("q") != null) {
+			q = request.params().named("q").value;
+		}
+		Query query = new Query(q);
 		query.setPage(1);
-		
+
 		QueryResult result = null;
 		StringBuilder sb = new StringBuilder();
 
 		try {
 			result = twitter.search(query);
 
-			sb.append("<pre>results");
+			sb.append("<div>Searching for <strong>").append(q).append("</strong></div>");
+
+			sb.append("<div><pre>results");
 			sb.append(("page " + result.getPage()));
 			for (Tweet tweet : result.getTweets()) {
 				sb.append("\n");
-				sb.append(tweet.getCreatedAt() + " - " + tweet.getFromUser() + ":" + tweet.getText() + ":" + tweet.getLocation());
+				sb.append(tweet.getCreatedAt() + " - " + tweet.getFromUser() + ":" + tweet.getText() + ":"
+						+ tweet.getLocation());
 			}
-			sb.append("</pre>");
+			sb.append("</pre></div>");
 
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block

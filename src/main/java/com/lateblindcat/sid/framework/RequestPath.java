@@ -2,6 +2,11 @@ package com.lateblindcat.sid.framework;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 
+ * @deprecated - use Params object 
+ *
+ */
 public class RequestPath {
 
 	private String path;
