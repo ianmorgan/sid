@@ -37,19 +37,19 @@ public class SimpleRouteMatcher {
 		// TODO: This really could be quite a lot neater	
 		while (true) {
 			if (!routeParts.isEmpty() && !requestParts.isEmpty()) {		
-				if (routeParts.head().equals("*")){
-					matchedParts = matchedParts.append(requestParts.head());
+				if (routeParts.head().value.equals("*")){
+					matchedParts = matchedParts.append(requestParts.head().value);
 					requestParts = requestParts.tail();
 				}
-				else if (routeParts.head().equals("**")){
+				else if (routeParts.head().value.equals("**")){
 					// TODO: this is a very simple globbing rule that 
 					// assumes the ** is at the end of the param list
 					while (!requestParts.isEmpty()){
-						matchedParts = matchedParts.append(requestParts.head());
+						matchedParts = matchedParts.append(requestParts.head().value);
 						requestParts = requestParts.tail();			
 					}
 				}
-				else if (!requestParts.head().equals(routeParts.head())) {
+				else if (!requestParts.head().value.equals(routeParts.head().value)) {
 					break;
 				}
 				else {

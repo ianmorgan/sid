@@ -41,7 +41,7 @@ public class TemplateHandler extends BaseHandler implements Handler {
 		if (matchResult.matched) {
 			PageResponse response;
 			try {
-				String[] templates = this.fileExtensions(matchResult.expandedParts.last());
+				String[] templates = this.fileExtensions(matchResult.expandedParts.last().value);
 
 				StringExpression rawContent = StringExpressionFactory.fromFile(new File("src/main/resources/templates/"
 						+ matchResult.expandedParts.expandToPath()));

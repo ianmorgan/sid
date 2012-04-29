@@ -1,5 +1,7 @@
 package com.lateblindcat.sid.framework;
 
+import com.lateblindcat.sid.framework.Params.Param;
+
 /**
  * A ruby on rails like routing model
  * 
@@ -23,8 +25,8 @@ public class Route {
 
 	public boolean named(String name) {
 		name = ":" + name;
-		for (String part : parts) {
-			if (name.equals(part)) {
+		for (Param part : parts) {
+			if (name.equals(part.value)) {
 				return true;
 			}
 		}
