@@ -7,6 +7,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
@@ -24,7 +25,7 @@ public class TwitterSearchSnapin implements Snapin {
 	}
 
 	@Override
-	public PageResponse process() {
+	public PageResponse process(Request request) {
 
 		// The factory instance is re-useable and thread safe.
 		Twitter twitter = new TwitterFactory().getInstance();

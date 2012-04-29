@@ -12,7 +12,7 @@ public class RouteMatchResult {
 	 * then the expanded values (i,e the value in the actual 
 	 * request when matched( is here
 	 */
-	public PartsList expandedParts;
+	public Params expandedParts;
 	
 	//public PartsList remainingParts;
 	//public HttpRequest remaining;

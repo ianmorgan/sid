@@ -42,7 +42,8 @@ public class SnapinHandler implements Handler {
 				// TODO - this is too simplistic - we should be looking at
 				// the content type to construct a suitable container (e.g what
 				// about an image)
-				StringExpression snapinContent = StringExpressionFactory.fromInputStream(snapin.process().getContent());
+				StringExpression snapinContent = StringExpressionFactory.fromInputStream(snapin.process(request)
+						.getContent());
 				layout = StringUtils.replace(layout, "content-goes-here", snapinContent.eval());
 
 				return PageResponseFactory.html(layout);

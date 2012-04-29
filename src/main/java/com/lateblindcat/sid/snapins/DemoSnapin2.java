@@ -1,5 +1,6 @@
 package com.lateblindcat.sid.snapins;
 
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
@@ -17,7 +18,7 @@ public class DemoSnapin2 implements Snapin{
 	}
 	
 	@Override
-	public PageResponse process() {		
+	public PageResponse process(Request request) {		
 		return PageResponseFactory.text("This is the second demo snapin");
 	}
 	

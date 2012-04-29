@@ -30,9 +30,9 @@ public class SimpleRouteMatcher {
 		RouteMatchResult result = new RouteMatchResult();
 
 		boolean matched = false;
-		PartsList routeParts = this.route.parts();
-		PartsList requestParts = request.path().getParts();
-		PartsList matchedParts = new PartsList();
+		Params routeParts = this.route.parts();
+		Params requestParts = request.path().getParts();
+		Params matchedParts = new Params();
 		
 		// TODO: This really could be quite a lot neater	
 		while (true) {

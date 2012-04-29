@@ -1,5 +1,6 @@
 package com.lateblindcat.sid.snapins;
 
+import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.forms.FormBuilder;
 import com.lateblindcat.sid.framework.forms.SubmitButton;
@@ -20,7 +21,7 @@ public class TwitterSearchFormSnapin implements Snapin {
 	}
 
 	@Override
-	public PageResponse process() {
+	public PageResponse process(Request request) {
 		FormBuilder builder = new FormBuilder("test", "GET", "/twitterseacrh");
 		builder.with(new TextField("search")).with(new SubmitButton("submit"));
 		

@@ -5,11 +5,10 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestPath {
 
 	private String path;
-	private PartsList parts;
+	private Params parts;
 
 	public RequestPath(HttpServletRequest req) {
 		this.path = req.getPathInfo();
-		System.out.print(this.path);
 	}
 
 	public RequestPath(String path) {
@@ -20,14 +19,14 @@ public class RequestPath {
 		return path;
 	}
 
-	public PartsList getParts() {
+	public Params getParts() {
 		if (parts == null) {
 			String working = path;
 			if (working.startsWith("/")) {
 				working = working.substring(1, working.length());
 			}
 
-			parts = new PartsList(working.split("/"));
+			parts = new Params(working.split("/"));
 		}
 		return parts;
 	}

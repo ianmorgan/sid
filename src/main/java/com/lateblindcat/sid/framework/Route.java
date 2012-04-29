@@ -9,7 +9,7 @@ package com.lateblindcat.sid.framework;
 public class Route {
 
 	private final RequestType requestType;
-	private final PartsList parts;
+	private final Params parts;
 
 	/**
 	 * 
@@ -35,15 +35,15 @@ public class Route {
 		return requestType;
 	}
 
-	public PartsList parts() {
+	public Params parts() {
 		return parts;
 	}
 
-	private PartsList buildParts(String url) {
+	private Params buildParts(String url) {
 		if (url.startsWith("/")) {
 			url = url.substring(1, url.length());
 		}
-		return new PartsList(url.split("/"));
+		return new Params(url.split("/"));
 	}
 
 	private String[] split(String route) {
