@@ -1,6 +1,5 @@
 package com.lateblindcat.sid.framework.pages;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 import com.lateblindcat.sid.framework.ResponseCode;
@@ -16,15 +15,13 @@ import com.lateblindcat.sid.framework.StringExpression;
  */
 public class PageResponseFactory {
 
-	public static PageResponse html(String html) {
+
+
+	public static PageResponse html(StringExpression html) {
 		return new PageResponseImpl(html, "text/html");
 	}
 
-	public static PageResponse html(StringExpression html) {
-		return new PageResponseImpl(html.eval(), "text/html");
-	}
-
-	public static PageResponse text(String text) {
+	public static PageResponse text(StringExpression text) {
 		return new PageResponseImpl(text, "text/plain");
 	}
 
@@ -41,7 +38,7 @@ public class PageResponseFactory {
 	}
 
 	public static PageResponse css(StringExpression css) {
-		return new PageResponseImpl(css.eval(), "text/css");
+		return new PageResponseImpl(css, "text/css");
 	}
 
 }

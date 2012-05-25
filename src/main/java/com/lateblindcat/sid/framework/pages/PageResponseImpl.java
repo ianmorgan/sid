@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import com.lateblindcat.sid.framework.ResponseCode;
+import com.lateblindcat.sid.framework.StringExpression;
 
 public class PageResponseImpl implements PageResponse {
 
@@ -11,11 +12,12 @@ public class PageResponseImpl implements PageResponse {
 	private String mimeType;
 	private ResponseCode status = ResponseCode.SC_OK;
 
-	public PageResponseImpl(String data, String mimeType) {
-		this.data = new ByteArrayInputStream(data.getBytes());
+	public PageResponseImpl(StringExpression data, String mimeType) {
+		this.data = new ByteArrayInputStream(data.eval().getBytes());
 		this.mimeType = mimeType;
 	}
 
+	@Deprecated
 	public PageResponseImpl(InputStream data, String mimeType) {
 		this.data = data;
 		this.mimeType = mimeType;

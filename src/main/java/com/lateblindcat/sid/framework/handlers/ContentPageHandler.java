@@ -47,7 +47,7 @@ public class ContentPageHandler implements Handler {
 
 			layout = mergeContentTemplate(matchResult, layout);
 
-			return PageResponseFactory.html(layout);
+			return PageResponseFactory.html(ExpressionFactory.string(layout));
 		} else {
 			return null;
 		}

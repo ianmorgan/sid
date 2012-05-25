@@ -1,5 +1,11 @@
 package com.lateblindcat.sid.framework;
 
+/**
+ * Enum representing the the underling Http Request method 
+ * 
+ * @author Ian Morgan
+ *
+ */
 public enum RequestType {
 	GET, POST;
 

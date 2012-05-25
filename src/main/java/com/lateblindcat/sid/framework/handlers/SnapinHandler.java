@@ -6,13 +6,12 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.lateblindcat.sid.framework.Context;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.RequestData;
-import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.ExpressionFactory;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 import com.lateblindcat.sid.framework.templates.VelocityRenderer;
@@ -46,7 +45,7 @@ public class SnapinHandler implements Handler {
 						.getContent());
 				layout = StringUtils.replace(layout, "content-goes-here", snapinContent.eval());
 
-				return PageResponseFactory.html(layout);
+				return PageResponseFactory.html(ExpressionFactory.string(layout));
 
 			}
 		}

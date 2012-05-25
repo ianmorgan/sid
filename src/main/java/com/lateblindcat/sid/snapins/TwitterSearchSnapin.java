@@ -7,6 +7,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
+import com.lateblindcat.sid.framework.ExpressionFactory;
 import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.pages.PageResponse;
@@ -56,7 +57,7 @@ public class TwitterSearchSnapin implements Snapin {
 			sb.append(e.getMessage());
 		}
 
-		return PageResponseFactory.text(sb.toString());
+		return PageResponseFactory.text(ExpressionFactory.string(sb));
 	}
 
 }

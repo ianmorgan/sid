@@ -1,5 +1,11 @@
 package com.lateblindcat.sid.framework;
 
+/**
+ * Enum for common http response codes
+ * 
+ * @author Ian Morgan 
+ *
+ */
 public enum ResponseCode {
 	SC_OK(200), 
 	SC_NOT_FOUND(404), 
