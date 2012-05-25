@@ -36,7 +36,7 @@ public class VelocityRenderer implements Renderer {
 	
 		String name = null;
 		try {
-			// TODO - should be cacheing template - see
+			// TODO - should be caching template - see
 			// http://stackoverflow.com/questions/1432468/how-to-use-string-as-velocity-template
 
 			String templateText = template.eval();

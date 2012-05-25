@@ -3,7 +3,9 @@ package com.lateblindcat.sid.framework;
 import java.util.Properties;
 
 /**
- * Holds all config / profile information.
+ * Holds all config / profile information. Current implementation is very simple
+ * and just loads from a properties file. 
+ * 
  * 
  * @author Ian Morgan
  */

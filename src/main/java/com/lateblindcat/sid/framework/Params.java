@@ -18,7 +18,7 @@ import com.lateblindcat.sid.framework.Params.Param;
  * 
  * <p>
  * This does not follow the HttpServletRequest model that keep the request path
- * and it query paarms or submitted data separate. Instead, it is based on the
+ * and it query params or submitted data separate. Instead, it is based on the
  * model used by Ruby on Rails whereby a request and it query parameters are
  * standardised into a number of tokens based on the route match and the values
  * in the query parameters.

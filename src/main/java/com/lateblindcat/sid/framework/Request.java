@@ -14,17 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 public class Request {
 
 	private RequestType type;
-	private RequestPath path;
 	private Params params;
 
 	public Request(HttpServletRequest req) {
-		path = new RequestPath(req);
 		type = RequestType.fromString(req.getMethod());
 		params = new Params(req);
 	}
 
-	public Request(Request matched, RequestPath remaining) {
-		path = remaining;
+	public Request(Request matched, Params remaining) {
+		params = remaining;
 		type = matched.type;
 	}
 
@@ -36,10 +34,6 @@ public class Request {
 		return params;
 	}
 
-	// better be use params
-	@Deprecated
-	public RequestPath path() {
-		return path;
-	}
+
 
 }

@@ -31,7 +31,7 @@ public class SimpleRouteMatcher {
 
 		boolean matched = false;
 		Params routeParts = this.route.parts();
-		Params requestParts = request.path().getParts();
+		Params requestParts = request.params();
 		Params matchedParts = new Params();
 		
 		// TODO: This really could be quite a lot neater	
