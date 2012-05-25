@@ -2,7 +2,7 @@ package com.lateblindcat.sid.framework.forms;
 
 import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 
 public class SubmitButton implements FormComponent {
 	private String name;
@@ -17,7 +17,7 @@ public class SubmitButton implements FormComponent {
 
 		sb.append("<input type=\"submit\" value=\"").append(name).append("\"/>");
 
-		return StringExpressionFactory.fromString(sb);
+		return ExpressionFactory.string(sb);
 	}
 
 }

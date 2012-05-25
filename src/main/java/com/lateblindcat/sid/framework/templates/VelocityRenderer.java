@@ -12,7 +12,7 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.Renderer;
 import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 import com.lateblindcat.sid.framework.exception.NotFoundException;
 import com.lateblindcat.sid.framework.exception.ParserException;
 import com.lateblindcat.sid.framework.exception.ProcessingException;
@@ -42,7 +42,7 @@ public class VelocityRenderer implements Renderer {
 			String templateText = template.eval();
 			StringWriter sw = new StringWriter();
 			Velocity.evaluate(context, sw, "dont-care", templateText);
-			return StringExpressionFactory.fromStringWriter(sw);
+			return ExpressionFactory.string(sw);
 		} catch (ResourceNotFoundException rnfe) {
 			throw new NotFoundException("Velocity", name);
 		} catch (ParseErrorException pee) {

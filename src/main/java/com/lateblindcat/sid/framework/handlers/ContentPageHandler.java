@@ -11,7 +11,7 @@ import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 import com.lateblindcat.sid.framework.exception.ProcessingException;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
@@ -41,7 +41,7 @@ public class ContentPageHandler implements Handler {
 		RouteMatchResult matchResult = routeMatcher.matches(request);
 
 		if (matchResult.matched) {
-			StringExpression rawContent = StringExpressionFactory.fromFile(new File(
+			StringExpression rawContent = ExpressionFactory.string(new File(
 					"src/main/resources/templates/layout.vtl"));
 			String layout = new VelocityRenderer().render(new Context(),rawContent).eval();
 
@@ -59,7 +59,7 @@ public class ContentPageHandler implements Handler {
 		if (matchResult.expandedParts.size() > 0) {
 			String content = "";
 			try {
-				rawContent = StringExpressionFactory.fromFile(new File("src/main/resources/templates/"
+				rawContent = ExpressionFactory.string(new File("src/main/resources/templates/"
 						+ matchResult.expandedParts.expandToPath() + ".md"));
 
 				content = new MarkdownRenderer().render(new Context(), rawContent).eval();

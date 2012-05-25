@@ -11,7 +11,7 @@ import com.lateblindcat.sid.framework.RequestData;
 import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.SimpleRouteMatcher;
-import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 import com.lateblindcat.sid.framework.templates.LessRenderer;
@@ -32,9 +32,9 @@ public class CSSHandler implements Handler {
 				fis = new FileInputStream(
 						new File("src/main/resources/css/" + matchResult.expandedParts.expandToPath()));
 
-				String rawCss = StringExpressionFactory.fromInputStream(fis).eval();
+				String rawCss = ExpressionFactory.string(fis).eval();
 				response = PageResponseFactory.css(renderer.render(new Context(),
-						StringExpressionFactory.fromString(rawCss)));
+						ExpressionFactory.string(rawCss)));
 			} catch (FileNotFoundException fnfex) {
 				response = PageResponseFactory.notFound();
 			} catch (Exception ex) {

@@ -12,21 +12,28 @@ import java.io.StringWriter;
 import com.lateblindcat.sid.framework.exception.NotFoundException;
 import com.lateblindcat.sid.framework.exception.ProcessingException;
 
-public class StringExpressionFactory {
 
-	public static StringExpression fromString(String data) {
+/**
+ * Static factory style methods to simplify building of expressions
+ * 
+ * @author Ian Morgan 
+ *
+ */
+public class ExpressionFactory {
+
+	public static StringExpression string(String data) {
 		return new ObjectBasedStringExpression(data);
 	}
 	
-	public static StringExpression fromString(StringBuilder sb) {
-		return fromString(sb.toString());
+	public static StringExpression string(StringBuilder sb) {
+		return string(sb.toString());
 	}
 
-	public static StringExpression fromStringWriter(StringWriter data) {
+	public static StringExpression string(StringWriter data) {
 		return new ObjectBasedStringExpression(data);
 	}
 
-	public static StringExpression fromInputStream(InputStream is) {
+	public static StringExpression string(InputStream is) {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			String s;
@@ -44,7 +51,7 @@ public class StringExpressionFactory {
 		}
 	}
 
-	public static StringExpression fromFile(File f) {
+	public static StringExpression string(File f) {
 		try {
 			FileReader reader = new FileReader(f);
 			BufferedReader br = new BufferedReader(reader);

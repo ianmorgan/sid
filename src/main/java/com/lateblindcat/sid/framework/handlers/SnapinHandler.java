@@ -12,7 +12,7 @@ import com.lateblindcat.sid.framework.Route;
 import com.lateblindcat.sid.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 import com.lateblindcat.sid.framework.templates.VelocityRenderer;
@@ -35,14 +35,14 @@ public class SnapinHandler implements Handler {
 				Context context = new Context(request);
 				context.setBean("snapins", snapins);
 
-				StringExpression rawContent = StringExpressionFactory.fromFile(new File(
+				StringExpression rawContent = ExpressionFactory.string(new File(
 						"src/main/resources/templates/console-layout.vtl"));
 				String layout = new VelocityRenderer().render(context, rawContent).eval();
 
 				// TODO - this is too simplistic - we should be looking at
 				// the content type to construct a suitable container (e.g what
 				// about an image)
-				StringExpression snapinContent = StringExpressionFactory.fromInputStream(snapin.process(request)
+				StringExpression snapinContent = ExpressionFactory.string(snapin.process(request)
 						.getContent());
 				layout = StringUtils.replace(layout, "content-goes-here", snapinContent.eval());
 

@@ -7,7 +7,7 @@ import com.asual.lesscss.LessException;
 import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.Renderer;
 import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 
 public class LessRenderer implements Renderer {
 
@@ -22,7 +22,7 @@ public class LessRenderer implements Renderer {
 			throw new ParseErrorException(e.getMessage());
 		}
 
-		return StringExpressionFactory.fromString(css);
+		return ExpressionFactory.string(css);
 	}
 
 }

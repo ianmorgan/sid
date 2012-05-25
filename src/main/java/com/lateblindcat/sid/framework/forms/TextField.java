@@ -2,7 +2,7 @@ package com.lateblindcat.sid.framework.forms;
 
 import com.lateblindcat.sid.framework.Request;
 import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 
 public class TextField implements FormComponent {
 	private String name;
@@ -25,7 +25,7 @@ public class TextField implements FormComponent {
 		sb.append(label.toString());
 		sb.append(": <input type=\"text\" name=\"").append(name).append("\"/><br />\n");
 
-		return StringExpressionFactory.fromString(sb);
+		return ExpressionFactory.string(sb);
 	}
 
 }

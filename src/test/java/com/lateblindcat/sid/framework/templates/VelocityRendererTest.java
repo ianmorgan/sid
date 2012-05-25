@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.lateblindcat.sid.framework.Context;
-import com.lateblindcat.sid.framework.StringExpressionFactory;
+import com.lateblindcat.sid.framework.ExpressionFactory;
 
 public class VelocityRendererTest {
 
@@ -23,7 +23,7 @@ public class VelocityRendererTest {
 	public void shouldRenderTemplate() {
 
 		context.setBean("name", "John Smith");
-		assertEquals("Hello, John Smith", renderer.render(context, StringExpressionFactory.fromString("Hello, $name"))
+		assertEquals("Hello, John Smith", renderer.render(context, ExpressionFactory.string("Hello, $name"))
 				.eval());
 
 	}
