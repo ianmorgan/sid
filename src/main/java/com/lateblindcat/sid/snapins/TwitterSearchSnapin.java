@@ -26,8 +26,6 @@ public class TwitterSearchSnapin implements Snapin {
 
 	@Override
 	public PageResponse process(Request request) {
-
-		// The factory instance is re-useable and thread safe.
 		Twitter twitter = new TwitterFactory().getInstance();
 		String q = "dartford";
 		if (request.params().named("q") != null) {
@@ -47,7 +45,7 @@ public class TwitterSearchSnapin implements Snapin {
 			sb.append("<div><pre>results");
 			sb.append(("page " + result.getPage()));
 			for (Object t : result.getTweets()) {
-				Tweet tweet = (Tweet)t;
+				Tweet tweet = (Tweet) t; // unknown prob compiling on Ubuntu
 				sb.append("\n");
 				sb.append(tweet.getCreatedAt() + " - " + tweet.getFromUser() + ":" + tweet.getText() + ":"
 						+ tweet.getLocation());
@@ -55,7 +53,6 @@ public class TwitterSearchSnapin implements Snapin {
 			sb.append("</pre></div>");
 
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
 			sb.append(e.getMessage());
 		}
 

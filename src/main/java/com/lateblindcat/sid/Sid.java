@@ -1,8 +1,12 @@
 package com.lateblindcat.sid;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +16,7 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import com.lateblindcat.sid.framework.Config;
 import com.lateblindcat.sid.framework.HttpServletResponseBuilder;
 import com.lateblindcat.sid.framework.handlers.CSSHandler;
 import com.lateblindcat.sid.framework.handlers.ContentPageHandler;
@@ -88,10 +93,23 @@ public class Sid extends AbstractHandler {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Server server = new Server(80);
+		Config config = loadConfig();
+		Server server = new Server(config.getPort());
 		server.setHandler(new Sid());
+
+		loadConfig();
 
 		server.start();
 		server.join();
+	}
+
+	private static Config loadConfig() throws Exception {
+		try {
+			Properties properties = new Properties();
+			properties.load(new FileInputStream(new File("sid.properties")));
+			return new Config(properties);
+		} catch (FileNotFoundException ex) {
+			return new Config();
+		}
 	}
 }
