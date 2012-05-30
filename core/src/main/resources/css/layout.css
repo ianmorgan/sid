@@ -1,0 +1,157 @@
+
+
+@pink: rgb(254,100,196);
+@dark_pink: darken(@pink,20%);
+@yellow: rgb(254,254,0);
+@text: rgb(89,74,55);
+
+.border-radius (@radius: 5px) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+body {
+margin: 0;
+padding: 0;
+background: url("../../images/sid2.jpg") no-repeat fixed center
+130px #FFFFFF;
+font: 15px/1.4em  "Museo Sans",Verdana,Arial,Helvetica,sans-serif;
+color: @text;
+}
+
+p {
+padding-top: 0;
+margin-top: 0;
+}
+
+
+#topmenu {
+position: absolute;
+top: 2em;
+left: 20em;
+height: 2em;
+}
+
+#content h1 {
+text-align: right;
+padding-right: 20px;
+font: 150% ;
+}
+
+#header {
+border-top: 1px solid #778899;
+border-bottom: 1px dotted #B2BCC6;
+height: 3em;
+}
+
+
+#nav {
+position: absolute;
+top: 7em;
+left: 1em;
+width: 12em;
+}
+
+#nav ul {
+list-style: none;
+margin-left: 1em;
+padding-left: 0;
+}
+
+#nav li {
+font-size: 90%;
+margin-bottom: 0.3em;
+width:10em;
+background-color: @pink;
+
+}
+
+#nav a:link, #nav a:visited {
+text-decoration: none;
+color: rgb(254,254,0);
+background-color: @pink;
+width:10em;
+}
+
+#nav a:hover {
+color: #000000;
+}
+
+
+#nav h2 {
+font: 110% Georgia, "Times New Roman", Times, serif;
+color: #2A4F6F;
+background-color: transparent;
+border-bottom: 1px dotted #cccccc;
+}
+
+#content {
+padding-top: 5em;
+margin-left: 16em;
+margin-right: 2em;
+width:40em;
+}
+
+h1 {
+font: 150% Georgia, "Times New Roman", Times, serif;
+}
+
+#content p {
+line-height: 1.2em;
+padding-left: 1.2em;
+}
+
+#content .code {
+	margin-top:-1em;
+    margin-left:-12em;
+	
+}
+
+
+
+#topmenu a:link, #topmenu a:visited {
+display: inline;
+color: @yellow;
+background-color: @pink;
+padding: 5px;
+margin: 3px;
+font: 20px/1.8em "Museo Sans",Verdana,Arial,Helvetica,sans-serif;
+font-weight: bold;
+text-decoration: none;
+.border-radius;
+}
+
+#topmenu a:hover {
+color: @yellow;
+_background-color: rgb(185,57,148);
+background-color: @dark_pink;
+
+}
+
+
+/*
+ Below are Custom styles for individual elements
+*/
+
+#open-console {
+	padding:7px;
+	margin-left:10px;
+	margin-top:20px;
+	color:@pink;
+	background-color: @yellow;	
+	
+}
+#open-console a:visited,#open-console a:link {
+		color:@pink;
+		font: 20px "Museo Sans",Verdana,Arial,Helvetica,sans-serif;
+		font-weight: bold;
+		text-decoration: none;
+		background-color: @yellow;
+		
+}
+
+#open-console a:hover {
+		color: rgb(185,57,148);
+		
+}

@@ -1,0 +1,16 @@
+        ---
+        Introduction 
+
+  This is micro framework powered by an embedded Jetty engine intended to make it simple to build basic 
+  administration and support web sites.
+  
+  Its inspired by the simplicity of popular Ruby web frameworks, in particular Sinatra and Ruby on Rails, and also 
+  the excellent Play Framework in Java and Scala.
+  
+  It uses a component based approach to write "snapins" using a model loosely based on the Microsoft Management 
+  Console (MMC) approach.
+  
+  It is not a general purpose web framework. 
+  
+  For more information see {{{concepts.html}Concepts}}.
+ 

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+	<head>
+		<title>
+			Sid !
+		</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="/resources/css/layout.css" />
+		<link rel="stylesheet" type="text/css" href="/resources/css/console-layout.css" />
+	</head>
+	<body>
+		<<div id="topmenu">
+			<a href="/">Home</a> 
+			<a href="/content/about">About</a>
+		</div>
+		<div id="content">
+			<h1>
+				
+			</h1>
+			content-goes-here
+		
+		</div>
+		<div id="nav">
+				<span id="console-image">Console</span>
+			<ul>
+		
+			#foreach( $snapin  in $snapins)
+    			<li>
+					<a href="$snapin.route.parts()">$snapin.name</a>
+				</li>
+			#end
+			</ul>
+		
+		</div>
+	</body>
+</html>
