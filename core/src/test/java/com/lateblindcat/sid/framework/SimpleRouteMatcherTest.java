@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 
 public class SimpleRouteMatcherTest extends ServletTestCase {
@@ -32,6 +34,18 @@ public class SimpleRouteMatcherTest extends ServletTestCase {
 		assertTrue(matcher.matches(servletRequest("GET", "/test/this")).matched);
 		assertFalse(matcher.matches(servletRequest("GET", "/test")).matched);
 		assertFalse(matcher.matches(servletRequest("GET", "/test/x")).matched);
+	}
+	
+	@Test
+	public void getRequestWithParams() {
+		// setup:
+		matcher = new SimpleRouteMatcher(new Route("GET:/test/*"));
+
+		// verify:
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("q", "wibble");
+		assertTrue(matcher.matches(servletRequest("GET", "/test", params)).matched);
+		assertFalse(matcher.matches(servletRequest("GET", "/test")).matched);
 	}
 
 	@Test

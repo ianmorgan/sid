@@ -1,5 +1,8 @@
 package com.lateblindcat.sid.framework;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
@@ -16,6 +19,17 @@ public abstract class ServletTestCase {
 		MockHttpServletRequest servletRequest = new MockHttpServletRequest();
 		servletRequest.setPathInfo(path);
 		servletRequest.setMethod(method);
+		Request request = new Request(servletRequest);
+		return request;
+	}
+
+	protected Request servletRequest(String method, String path, Map<String, String> params) {
+		MockHttpServletRequest servletRequest = new MockHttpServletRequest();
+		servletRequest.setPathInfo(path);
+		servletRequest.setMethod(method);
+		for (Entry<String, String> entry : params.entrySet()) {
+			servletRequest.addParameter(entry.getKey(), entry.getValue());
+		}
 		Request request = new Request(servletRequest);
 		return request;
 	}

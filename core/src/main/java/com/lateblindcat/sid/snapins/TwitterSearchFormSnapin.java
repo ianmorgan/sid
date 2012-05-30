@@ -23,7 +23,7 @@ public class TwitterSearchFormSnapin implements Snapin {
 
 	@Override
 	public PageResponse process(Request request) {
-		FormBuilder builder = new FormBuilder("test", "GET", "/twittersearch");
+		FormBuilder builder = new FormBuilder("test", "GET", "/dotwittersearch");
 		builder.with(new TextField(new Label("search"), "q")).with(new SubmitButton("submit"));
 
 		return PageResponseFactory.html(builder.render(null));

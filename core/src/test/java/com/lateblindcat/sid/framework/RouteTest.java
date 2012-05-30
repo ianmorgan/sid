@@ -27,6 +27,7 @@ public class RouteTest {
 		assertEquals("this", route.parts().tail().head().value);
 	}
 	
+	
 	@Test
 	public void simpleGetRequestWithId() {
 		Route route = new Route("GET:/test/:id");

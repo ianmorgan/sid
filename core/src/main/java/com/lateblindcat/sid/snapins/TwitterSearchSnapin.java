@@ -22,7 +22,7 @@ public class TwitterSearchSnapin implements Snapin {
 
 	@Override
 	public Route getRoute() {
-		return new Route("GET:/twittersearch");
+		return new Route("GET:/dotwittersearch/*");
 	}
 
 	@Override

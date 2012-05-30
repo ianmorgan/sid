@@ -74,7 +74,6 @@ public class Params implements Iterable<Param> {
 		for (String name : req.getParameterMap().keySet()) {
 			parts.add(new Param(name, req.getParameter(name)));
 		}
-		// return parts;
 	}
 
 	public Params(Collection<String> params) {
