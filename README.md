@@ -1,5 +1,5 @@
 
-A micro-framework for setting up admin style web apps.
+A micro-framework for setting up admin style web apps. 
 
 Written in Java and running on Jetty. Inspired by Sinatra, Ruby on Rails and The Play framework.
 
