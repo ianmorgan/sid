@@ -1,7 +1,12 @@
 package com.lateblindcat.sid.framework.handlers;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.Request;
@@ -31,28 +36,34 @@ import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 public class TemplateHandler extends BaseHandler implements Handler {
 
 	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher(new Route("GET:/templates/**"));
-
 	private TemplateEngine templateEngine = new TemplateEngine();
+	private ResourceLoader loader = new DefaultResourceLoader();
 
 	@Override
 	public PageResponse process(Request request, RequestData requestData) {
 		RouteMatchResult matchResult = routeMatcher.matches(request);
 
 		if (matchResult.matched) {
-			PageResponse response;
-			try {
-				String[] templates = this.fileExtensions(matchResult.expandedParts.last().value);
+			// try {
+			String[] templates = this.fileExtensions(matchResult.expandedParts.last().value);
 
-				StringExpression rawContent = ExpressionFactory.string(new File("src/main/resources/templates/"
-						+ matchResult.expandedParts.expandToPath()));
-
-				StringExpression rendered = templateEngine.render(new Context(request), rawContent, templates);
-				response = PageResponseFactory.html(rendered);
-
-			} catch (RuntimeException re) {
-				response = PageResponseFactory.notFound();
+			Resource template = loader.getResource("classpath:templates/" + matchResult.expandedParts.expandToPath());
+			if (template.exists()) {
+				try {
+					StringExpression rawContent = ExpressionFactory.string(template.getInputStream());
+					StringExpression rendered = templateEngine.render(new Context(request), rawContent, templates);
+					return PageResponseFactory.html(rendered);
+				} catch (IOException e) {
+					return PageResponseFactory.internalError();
+				}
+			} else {
+				return PageResponseFactory.notFound();
 			}
-			return response;
+
+			// } catch (RuntimeException re) {
+			// // TOD
+			// response = PageResponseFactory.notFound();
+			// }
 		} else {
 			return null;
 		}

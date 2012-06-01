@@ -51,6 +51,7 @@ public class Sid extends AbstractHandler {
 		com.lateblindcat.sid.framework.Request request = new com.lateblindcat.sid.framework.Request(httpServletRequest);
 
 		for (Handler handler : handlers) {
+			System.out.println (">> handler: "+ handler.getClass().getName());
 			PageResponse pageResponse = handler.process(request, null);
 
 			if (pageResponse != null) {
