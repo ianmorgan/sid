@@ -3,9 +3,9 @@ package com.lateblindcat.sid.framework.forms;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lateblindcat.sid.framework.Request;
-import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.Request;
 
 public class FormBuilder {
 

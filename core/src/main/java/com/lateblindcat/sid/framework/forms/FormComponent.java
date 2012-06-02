@@ -1,7 +1,7 @@
 package com.lateblindcat.sid.framework.forms;
 
-import com.lateblindcat.sid.framework.Request;
-import com.lateblindcat.sid.framework.StringExpression;
+import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.Request;
 
 public interface FormComponent {
 	

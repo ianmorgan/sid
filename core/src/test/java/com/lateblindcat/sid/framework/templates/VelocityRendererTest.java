@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.lateblindcat.sid.framework.Context;
-import com.lateblindcat.sid.framework.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.ExpressionFactory;
+import com.lateblindcat.sid.core.framework.Context;
 
 public class VelocityRendererTest {
 

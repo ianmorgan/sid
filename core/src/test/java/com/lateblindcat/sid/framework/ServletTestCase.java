@@ -5,6 +5,8 @@ import java.util.Map.Entry;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 
+import com.lateblindcat.sid.core.framework.Request;
+
 /**
  * <p>
  * A base class for unit tests that provides servlet mocking functionality

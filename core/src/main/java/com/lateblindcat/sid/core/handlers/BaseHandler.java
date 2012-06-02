@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework.handlers;
+package com.lateblindcat.sid.core.handlers;
 
 import java.util.Arrays;
 

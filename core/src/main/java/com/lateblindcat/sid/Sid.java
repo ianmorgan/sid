@@ -16,15 +16,15 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
-import com.lateblindcat.sid.framework.Config;
-import com.lateblindcat.sid.framework.HttpServletResponseBuilder;
-import com.lateblindcat.sid.framework.handlers.CSSHandler;
-import com.lateblindcat.sid.framework.handlers.ContentPageHandler;
+import com.lateblindcat.sid.core.framework.Config;
+import com.lateblindcat.sid.core.framework.HttpServletResponseBuilder;
+import com.lateblindcat.sid.core.handlers.CSSHandler;
+import com.lateblindcat.sid.core.handlers.ContentPageHandler;
+import com.lateblindcat.sid.core.handlers.ImageHandler;
+import com.lateblindcat.sid.core.handlers.PageHandler;
+import com.lateblindcat.sid.core.handlers.SnapinHandler;
+import com.lateblindcat.sid.core.handlers.TemplateHandler;
 import com.lateblindcat.sid.framework.handlers.Handler;
-import com.lateblindcat.sid.framework.handlers.ImageHandler;
-import com.lateblindcat.sid.framework.handlers.PageHandler;
-import com.lateblindcat.sid.framework.handlers.SnapinHandler;
-import com.lateblindcat.sid.framework.handlers.TemplateHandler;
 import com.lateblindcat.sid.framework.pages.HomePage;
 import com.lateblindcat.sid.framework.pages.Page;
 import com.lateblindcat.sid.framework.pages.PageResponse;
@@ -48,7 +48,7 @@ public class Sid extends AbstractHandler {
 		handlers.add(buildSnapins());
 		handlers.add(buildPageHandlers());
 
-		com.lateblindcat.sid.framework.Request request = new com.lateblindcat.sid.framework.Request(httpServletRequest);
+		com.lateblindcat.sid.core.framework.Request request = new com.lateblindcat.sid.core.framework.Request(httpServletRequest);
 
 		for (Handler handler : handlers) {
 			System.out.println (">> handler: "+ handler.getClass().getName());

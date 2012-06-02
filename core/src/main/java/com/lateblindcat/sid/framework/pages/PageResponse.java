@@ -2,7 +2,7 @@ package com.lateblindcat.sid.framework.pages;
 
 import java.io.InputStream;
 
-import com.lateblindcat.sid.framework.ResponseCode;
+import com.lateblindcat.sid.core.framework.ResponseCode;
 
 /**
  * A simplified way of defining the HTTP response. This is 

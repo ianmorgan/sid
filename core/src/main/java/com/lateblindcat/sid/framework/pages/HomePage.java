@@ -2,9 +2,9 @@ package com.lateblindcat.sid.framework.pages;
 
 import java.io.File;
 
-import com.lateblindcat.sid.framework.Context;
-import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.Context;
 import com.lateblindcat.sid.framework.templates.VelocityRenderer;
 
 public class HomePage implements Page {

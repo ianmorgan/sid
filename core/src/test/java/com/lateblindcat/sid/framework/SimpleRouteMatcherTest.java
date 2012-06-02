@@ -9,6 +9,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.lateblindcat.sid.core.framework.Route;
+import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
+
 public class SimpleRouteMatcherTest extends ServletTestCase {
 	private SimpleRouteMatcher matcher;
 

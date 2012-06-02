@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.lateblindcat.sid.core.framework.RequestType;
+import com.lateblindcat.sid.core.framework.Route;
+
 //@Test
 public class RouteTest {
 

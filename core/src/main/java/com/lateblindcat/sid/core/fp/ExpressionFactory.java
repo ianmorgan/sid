@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework;
+package com.lateblindcat.sid.core.fp;
 
 import java.io.BufferedReader;
 import java.io.File;

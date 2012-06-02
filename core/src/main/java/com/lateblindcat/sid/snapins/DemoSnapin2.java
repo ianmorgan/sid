@@ -1,8 +1,8 @@
 package com.lateblindcat.sid.snapins;
 
-import com.lateblindcat.sid.framework.ExpressionFactory;
-import com.lateblindcat.sid.framework.Request;
-import com.lateblindcat.sid.framework.Route;
+import com.lateblindcat.sid.core.fp.ExpressionFactory;
+import com.lateblindcat.sid.core.framework.Request;
+import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 

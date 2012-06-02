@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework;
+package com.lateblindcat.sid.core.framework;
 
 /**
  * Enum for common http response codes

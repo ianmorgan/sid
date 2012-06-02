@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.lateblindcat.sid.core.fp.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.Context;
+import com.lateblindcat.sid.core.framework.TemplateEngine;
+
 public class TemplateEngineTest {
 
 	private TemplateEngine engine = new TemplateEngine();

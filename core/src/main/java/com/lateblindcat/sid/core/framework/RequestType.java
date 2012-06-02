@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework;
+package com.lateblindcat.sid.core.framework;
 
 /**
  * Enum representing the the underling Http Request method 

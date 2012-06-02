@@ -1,8 +1,9 @@
-package com.lateblindcat.sid.framework;
+package com.lateblindcat.sid.core.framework;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.framework.exception.ProcessingException;
 import com.lateblindcat.sid.framework.templates.LessRenderer;
 import com.lateblindcat.sid.framework.templates.MarkdownRenderer;

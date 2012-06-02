@@ -3,8 +3,8 @@ package com.lateblindcat.sid.framework.pages;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import com.lateblindcat.sid.framework.ResponseCode;
-import com.lateblindcat.sid.framework.StringExpression;
+import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.ResponseCode;
 
 public class PageResponseImpl implements PageResponse {
 

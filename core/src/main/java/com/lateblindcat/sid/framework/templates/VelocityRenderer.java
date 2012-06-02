@@ -9,10 +9,10 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import com.lateblindcat.sid.framework.Context;
-import com.lateblindcat.sid.framework.Renderer;
-import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.Context;
+import com.lateblindcat.sid.core.framework.Renderer;
 import com.lateblindcat.sid.framework.exception.NotFoundException;
 import com.lateblindcat.sid.framework.exception.ParserException;
 import com.lateblindcat.sid.framework.exception.ProcessingException;

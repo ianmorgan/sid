@@ -1,4 +1,5 @@
-package com.lateblindcat.sid.framework;
+package com.lateblindcat.sid.core.fp;
+
 
 /**
  * <p>

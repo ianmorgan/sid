@@ -1,18 +1,21 @@
-package com.lateblindcat.sid.framework.handlers;
+package com.lateblindcat.sid.core.handlers;
 
 import java.io.File;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.ResourceLoader;
 
-import com.lateblindcat.sid.framework.Context;
-import com.lateblindcat.sid.framework.Request;
-import com.lateblindcat.sid.framework.RequestData;
-import com.lateblindcat.sid.framework.Route;
-import com.lateblindcat.sid.framework.RouteMatchResult;
-import com.lateblindcat.sid.framework.SimpleRouteMatcher;
-import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.Context;
+import com.lateblindcat.sid.core.framework.Request;
+import com.lateblindcat.sid.core.framework.RequestData;
+import com.lateblindcat.sid.core.framework.Route;
+import com.lateblindcat.sid.core.framework.RouteMatchResult;
+import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.framework.exception.ProcessingException;
+import com.lateblindcat.sid.framework.handlers.Handler;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 import com.lateblindcat.sid.framework.templates.MarkdownRenderer;
@@ -35,15 +38,16 @@ import com.lateblindcat.sid.framework.templates.VelocityRenderer;
 public class ContentPageHandler implements Handler {
 
 	private SimpleRouteMatcher routeMatcher = new SimpleRouteMatcher(new Route("GET:/content/**"));
+	private ResourceLoader loader = new DefaultResourceLoader();
 
 	@Override
 	public PageResponse process(Request request, RequestData requestData) {
 		RouteMatchResult matchResult = routeMatcher.matches(request);
 
 		if (matchResult.matched) {
-			StringExpression rawContent = ExpressionFactory.string(new File(
-					"src/main/resources/templates/layout.vtl"));
-			String layout = new VelocityRenderer().render(new Context(),rawContent).eval();
+			StringExpression rawContent = ExpressionFactory
+					.string(loader.getResource("classpath:templates/layout.vtl"));
+			String layout = new VelocityRenderer().render(new Context(), rawContent).eval();
 
 			layout = mergeContentTemplate(matchResult, layout);
 

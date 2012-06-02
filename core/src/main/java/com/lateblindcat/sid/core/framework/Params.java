@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework;
+package com.lateblindcat.sid.core.framework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.lateblindcat.sid.framework.Params.Param;
+import com.lateblindcat.sid.core.framework.Params.Param;
 
 /**
  * <p>

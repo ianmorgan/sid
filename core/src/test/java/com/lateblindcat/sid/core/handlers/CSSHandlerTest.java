@@ -1,14 +1,16 @@
-package com.lateblindcat.sid.framework.handlers;
+package com.lateblindcat.sid.core.handlers;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import com.lateblindcat.sid.framework.Request;
-import com.lateblindcat.sid.framework.RequestData;
+import com.lateblindcat.sid.core.fp.ExpressionFactory;
+import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.Request;
+import com.lateblindcat.sid.core.framework.RequestData;
+import com.lateblindcat.sid.core.handlers.CSSHandler;
 import com.lateblindcat.sid.framework.ServletTestCase;
-import com.lateblindcat.sid.framework.StringExpression;
-import com.lateblindcat.sid.framework.ExpressionFactory;
+import com.lateblindcat.sid.framework.handlers.Handler;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 
 public class CSSHandlerTest extends ServletTestCase {

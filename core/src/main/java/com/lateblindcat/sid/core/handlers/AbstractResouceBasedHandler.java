@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework.handlers;
+package com.lateblindcat.sid.core.handlers;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,9 +7,10 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-import com.lateblindcat.sid.framework.Request;
-import com.lateblindcat.sid.framework.RequestData;
-import com.lateblindcat.sid.framework.RouteMatchResult;
+import com.lateblindcat.sid.core.framework.Request;
+import com.lateblindcat.sid.core.framework.RequestData;
+import com.lateblindcat.sid.core.framework.RouteMatchResult;
+import com.lateblindcat.sid.framework.handlers.Handler;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 
