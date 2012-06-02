@@ -9,22 +9,24 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 
+import org.springframework.core.io.Resource;
+
 import com.lateblindcat.sid.framework.exception.NotFoundException;
 import com.lateblindcat.sid.framework.exception.ProcessingException;
-
+import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 
 /**
  * Static factory style methods to simplify building of expressions
  * 
- * @author Ian Morgan 
- *
+ * @author Ian Morgan
+ * 
  */
 public class ExpressionFactory {
 
 	public static StringExpression string(String data) {
 		return new ObjectBasedStringExpression(data);
 	}
-	
+
 	public static StringExpression string(StringBuilder sb) {
 		return string(sb.toString());
 	}
@@ -67,6 +69,18 @@ public class ExpressionFactory {
 			throw new NotFoundException(f.getAbsolutePath());
 		} catch (IOException e) {
 			throw new ProcessingException("Error reading " + f.getAbsolutePath());
+		}
+	}
+
+	public static StringExpression string(Resource resource) {
+		if (resource.exists()) {
+			try {
+				return string(resource.getInputStream());
+			} catch (IOException e) {
+				throw new ProcessingException("Errpr reading Resource: " + resource.getDescription(), e);
+			}
+		} else {
+			throw new ProcessingException("Resource: " + resource.getDescription() + " cannot be located");
 		}
 	}
 

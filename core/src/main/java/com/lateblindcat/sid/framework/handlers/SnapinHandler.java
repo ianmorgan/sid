@@ -1,9 +1,11 @@
 package com.lateblindcat.sid.framework.handlers;
 
-import java.io.File;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 import com.lateblindcat.sid.framework.Context;
 import com.lateblindcat.sid.framework.ExpressionFactory;
@@ -19,6 +21,7 @@ import com.lateblindcat.sid.snapins.Snapin;
 
 public class SnapinHandler implements Handler {
 
+	private ResourceLoader loader = new DefaultResourceLoader();
 	private List<Snapin> snapins;
 
 	public SnapinHandler(List<Snapin> snapins) {
@@ -34,15 +37,13 @@ public class SnapinHandler implements Handler {
 				Context context = new Context(request);
 				context.setBean("snapins", snapins);
 
-				StringExpression rawContent = ExpressionFactory.string(new File(
-						"src/main/resources/templates/console-layout.vtl"));
+				StringExpression rawContent = loadConsoleTemplate();
 				String layout = new VelocityRenderer().render(context, rawContent).eval();
 
 				// TODO - this is too simplistic - we should be looking at
 				// the content type to construct a suitable container (e.g what
 				// about an image)
-				StringExpression snapinContent = ExpressionFactory.string(snapin.process(request)
-						.getContent());
+				StringExpression snapinContent = ExpressionFactory.string(snapin.process(request).getContent());
 				layout = StringUtils.replace(layout, "content-goes-here", snapinContent.eval());
 
 				return PageResponseFactory.html(ExpressionFactory.string(layout));
@@ -51,6 +52,11 @@ public class SnapinHandler implements Handler {
 		}
 
 		return null;
+	}
+
+	private StringExpression loadConsoleTemplate() {
+		Resource resource = loader.getResource("classpath:templates/console-layout.vtl");
+		return ExpressionFactory.string(resource);
 	}
 
 }

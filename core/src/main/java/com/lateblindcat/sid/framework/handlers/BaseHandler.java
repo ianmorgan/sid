@@ -12,6 +12,7 @@ import java.util.Arrays;
  */
 public abstract class BaseHandler {
 
+	// TODO - this logic should be contained with in the Request object
 	protected String[] fileExtensions(String filePath) {
 		String[] parts = filePath.split("\\.");
 
@@ -20,7 +21,6 @@ public abstract class BaseHandler {
 		} else {
 			return new String[0];
 		}
-
 	}
 
 }
