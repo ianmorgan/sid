@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework;
+package com.lateblindcat.sid.core.framework;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

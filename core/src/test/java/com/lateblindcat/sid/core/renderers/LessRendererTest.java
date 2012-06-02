@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework.templates;
+package com.lateblindcat.sid.core.renderers;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
+import com.lateblindcat.sid.core.renderers.LessRenderer;
 
 public class LessRendererTest {
 

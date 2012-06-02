@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework.exception;
+package com.lateblindcat.sid.core.exception;
 
 /**
  * <p>

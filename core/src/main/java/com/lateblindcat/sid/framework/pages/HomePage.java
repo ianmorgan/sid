@@ -5,7 +5,7 @@ import java.io.File;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
-import com.lateblindcat.sid.framework.templates.VelocityRenderer;
+import com.lateblindcat.sid.core.renderers.VelocityRenderer;
 
 public class HomePage implements Page {
 

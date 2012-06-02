@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework.handlers;
+package com.lateblindcat.sid.core.handlers;
 
 import com.lateblindcat.sid.core.framework.Request;
 import com.lateblindcat.sid.core.framework.RequestData;

@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 
+import com.lateblindcat.sid.core.exception.ProcessingException;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
@@ -14,12 +15,10 @@ import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
-import com.lateblindcat.sid.framework.exception.ProcessingException;
-import com.lateblindcat.sid.framework.handlers.Handler;
+import com.lateblindcat.sid.core.renderers.MarkdownRenderer;
+import com.lateblindcat.sid.core.renderers.VelocityRenderer;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
-import com.lateblindcat.sid.framework.templates.MarkdownRenderer;
-import com.lateblindcat.sid.framework.templates.VelocityRenderer;
 
 /**
  * <p>

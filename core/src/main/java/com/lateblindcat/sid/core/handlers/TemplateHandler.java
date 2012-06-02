@@ -15,7 +15,6 @@ import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.core.framework.TemplateEngine;
-import com.lateblindcat.sid.framework.handlers.Handler;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
 

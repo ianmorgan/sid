@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework.templates;
+package com.lateblindcat.sid.core.renderers;
 
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;

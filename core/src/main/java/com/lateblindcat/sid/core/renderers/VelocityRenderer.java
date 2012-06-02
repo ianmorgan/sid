@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework.templates;
+package com.lateblindcat.sid.core.renderers;
 
 import java.io.StringWriter;
 import java.util.Date;
@@ -9,13 +9,13 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
+import com.lateblindcat.sid.core.exception.NotFoundException;
+import com.lateblindcat.sid.core.exception.ParserException;
+import com.lateblindcat.sid.core.exception.ProcessingException;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
 import com.lateblindcat.sid.core.framework.Renderer;
-import com.lateblindcat.sid.framework.exception.NotFoundException;
-import com.lateblindcat.sid.framework.exception.ParserException;
-import com.lateblindcat.sid.framework.exception.ProcessingException;
 
 /**
  * Velocity template integration

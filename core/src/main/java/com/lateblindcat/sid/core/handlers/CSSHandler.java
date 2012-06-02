@@ -11,9 +11,9 @@ import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
+import com.lateblindcat.sid.core.renderers.LessRenderer;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
-import com.lateblindcat.sid.framework.templates.LessRenderer;
 
 public class CSSHandler extends AbstractResouceBasedHandler {
 

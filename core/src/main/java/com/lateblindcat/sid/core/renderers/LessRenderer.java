@@ -1,4 +1,4 @@
-package com.lateblindcat.sid.framework.templates;
+package com.lateblindcat.sid.core.renderers;
 
 import org.apache.velocity.exception.ParseErrorException;
 
