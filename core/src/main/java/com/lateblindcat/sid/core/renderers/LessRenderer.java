@@ -7,7 +7,6 @@ import com.asual.lesscss.LessException;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
-import com.lateblindcat.sid.core.framework.Renderer;
 
 public class LessRenderer implements Renderer {
 

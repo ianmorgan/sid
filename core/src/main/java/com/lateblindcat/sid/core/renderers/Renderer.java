@@ -1,6 +1,7 @@
-package com.lateblindcat.sid.core.framework;
+package com.lateblindcat.sid.core.renderers;
 
 import com.lateblindcat.sid.core.fp.StringExpression;
+import com.lateblindcat.sid.core.framework.Context;
 
 /**
  * A simple interface to invoke any rendering engine. 

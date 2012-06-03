@@ -7,6 +7,7 @@ import com.lateblindcat.sid.core.exception.ProcessingException;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.renderers.LessRenderer;
 import com.lateblindcat.sid.core.renderers.MarkdownRenderer;
+import com.lateblindcat.sid.core.renderers.Renderer;
 import com.lateblindcat.sid.core.renderers.VelocityRenderer;
 
 /**

@@ -16,8 +16,12 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import com.lateblindcat.sid.core.framework.AppContext;
+import com.lateblindcat.sid.core.framework.AppContextImpl;
 import com.lateblindcat.sid.core.framework.Config;
 import com.lateblindcat.sid.core.framework.HttpServletResponseBuilder;
+import com.lateblindcat.sid.core.framework.ModuleConfig;
+import com.lateblindcat.sid.core.framework.ModuleConfigLoader;
 import com.lateblindcat.sid.core.handlers.CSSHandler;
 import com.lateblindcat.sid.core.handlers.ContentPageHandler;
 import com.lateblindcat.sid.core.handlers.Handler;
@@ -48,10 +52,11 @@ public class Sid extends AbstractHandler {
 		handlers.add(buildSnapins());
 		handlers.add(buildPageHandlers());
 
-		com.lateblindcat.sid.core.framework.Request request = new com.lateblindcat.sid.core.framework.Request(httpServletRequest);
+		com.lateblindcat.sid.core.framework.Request request = new com.lateblindcat.sid.core.framework.Request(
+				httpServletRequest);
 
 		for (Handler handler : handlers) {
-			System.out.println (">> handler: "+ handler.getClass().getName());
+			System.out.println(">> handler: " + handler.getClass().getName());
 			PageResponse pageResponse = handler.process(request, null);
 
 			if (pageResponse != null) {
@@ -94,9 +99,13 @@ public class Sid extends AbstractHandler {
 	}
 
 	public static void main(String[] args) throws Exception {
+
+		AppContext context = new AppContextImpl();
 		Config config = loadConfig();
 		Server server = new Server(config.getPort());
 		server.setHandler(new Sid());
+
+		List<ModuleConfig> configs = new ModuleConfigLoader(context).loadConfigs();
 
 		loadConfig();
 
