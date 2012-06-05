@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.BasicConfigurator;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
@@ -19,6 +20,7 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 import com.lateblindcat.sid.core.framework.AppContext;
 import com.lateblindcat.sid.core.framework.AppContextImpl;
 import com.lateblindcat.sid.core.framework.Config;
+import com.lateblindcat.sid.core.framework.HandlerList;
 import com.lateblindcat.sid.core.framework.HttpServletResponseBuilder;
 import com.lateblindcat.sid.core.framework.ModuleConfig;
 import com.lateblindcat.sid.core.framework.ModuleConfigLoader;
@@ -32,13 +34,12 @@ import com.lateblindcat.sid.core.handlers.TemplateHandler;
 import com.lateblindcat.sid.framework.pages.HomePage;
 import com.lateblindcat.sid.framework.pages.Page;
 import com.lateblindcat.sid.framework.pages.PageResponse;
-import com.lateblindcat.sid.snapins.DemoSnapin;
-import com.lateblindcat.sid.snapins.DemoSnapin2;
 import com.lateblindcat.sid.snapins.Snapin;
-import com.lateblindcat.sid.snapins.TwitterSearchFormSnapin;
-import com.lateblindcat.sid.snapins.TwitterSearchSnapin;
 
 public class Sid extends AbstractHandler {
+
+	static List<ModuleConfig> configs;
+
 	public void handle(String target, Request baseRequest, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException, ServletException {
 
@@ -51,6 +52,9 @@ public class Sid extends AbstractHandler {
 		handlers.add(new ContentPageHandler());
 		handlers.add(buildSnapins());
 		handlers.add(buildPageHandlers());
+		
+		//HandlerList<Snapin> snapins = new HandlerList<Snapin>()
+		
 
 		com.lateblindcat.sid.core.framework.Request request = new com.lateblindcat.sid.core.framework.Request(
 				httpServletRequest);
@@ -86,26 +90,24 @@ public class Sid extends AbstractHandler {
 	}
 
 	private Handler buildSnapins() {
-		// TODO: some form of auto registration based on package
-		// or using annotations
 		List<Snapin> snapins = new ArrayList<Snapin>();
-		snapins.add(new DemoSnapin());
-		snapins.add(new DemoSnapin2());
-		snapins.add(new TwitterSearchFormSnapin());
-		snapins.add(new TwitterSearchSnapin());
-
+		for (ModuleConfig config : configs) {
+			snapins.addAll(config.snapins());
+		}
 		return new SnapinHandler(snapins);
-
 	}
 
 	public static void main(String[] args) throws Exception {
+
+		// Set up a simple configuration that logs on the console.
+		BasicConfigurator.configure();
 
 		AppContext context = new AppContextImpl();
 		Config config = loadConfig();
 		Server server = new Server(config.getPort());
 		server.setHandler(new Sid());
 
-		List<ModuleConfig> configs = new ModuleConfigLoader(context).loadConfigs();
+		configs = new ModuleConfigLoader(context).loadConfigs();
 
 		loadConfig();
 

@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 public interface AppContext {
 	
 	Logger logger(Class<?> context);
-	
+
 	ClassLoader classLoader();
 	
 }

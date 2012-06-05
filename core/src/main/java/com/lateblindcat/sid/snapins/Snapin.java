@@ -12,6 +12,7 @@ import com.lateblindcat.sid.framework.pages.PageResponse;
  *
  */
 public interface Snapin {
+	
 	/**
 	 * The display name - used in titles, menus
 	 * @return
