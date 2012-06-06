@@ -2,6 +2,8 @@ package com.lateblindcat.sid.core.framework;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.lateblindcat.sid.rack.servlet.ServletRackBridge;
+
 /**
  * Represents the data in an HtpRequest. This is essentially a simplified
  * wrapper on the HttpServletRequest that is designed to work in conjunction
@@ -17,6 +19,10 @@ public class Request {
 	private Params params;
 
 	public Request(HttpServletRequest req) {
+		System.out.println ("pathInfo:" +  req.getPathInfo());
+		System.out.println ("queryString:" +  req.getQueryString());
+		
+		System.out.println(new ServletRackBridge().buildRackEnv(req).toString());
 		type = RequestType.fromString(req.getMethod());
 		params = new Params(req);
 	}

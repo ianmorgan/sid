@@ -2,6 +2,8 @@ package com.lateblindcat.sid.rack;
 
 import java.io.InputStream;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * <p>
  * A Java equivalent to Ruby Rack (http://rack.rubyforge.org/doc/SPEC.html) Env
@@ -39,12 +41,27 @@ public class Env {
 	public String HTTP_DNT;
 	public String HTTP_CONNECTION;
 	public String HTTP_COOKIE;
-	
-	
+
 	public InputStream rack_input;
-	public InputStream rack_errors; 
-	
-	
+	public InputStream rack_errors;
+
 	// TODO what about other HTTP variables
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.lateblindcat.sid.rack.Rack holds the following:\n");
+		if (StringUtils.isNotEmpty(REQUEST_METHOD)) {
+			sb.append("REQUEST_METHOD = " + REQUEST_METHOD + "\n");
+		}
+		if (StringUtils.isNotEmpty(PATH_INFO)) {
+			sb.append("PATH_INFO = " + PATH_INFO + "\n");
+		}
+		if (StringUtils.isNotEmpty(QUERY_STRING)) {
+			sb.append("QUERY_STRING = " + QUERY_STRING + "\n");
+		}
+		return sb.toString();
+	}
 
 }
