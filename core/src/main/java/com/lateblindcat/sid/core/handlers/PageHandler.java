@@ -2,13 +2,13 @@ package com.lateblindcat.sid.core.handlers;
 
 import java.util.List;
 
-import com.lateblindcat.sid.core.framework.Request;
 import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.framework.pages.Page;
 import com.lateblindcat.sid.framework.pages.PageResponse;
+import com.lateblindcat.sid.rack.RackRequest;
 
 public class PageHandler implements Handler  {
 	
@@ -20,7 +20,7 @@ public class PageHandler implements Handler  {
 
 	
 	@Override
-	public PageResponse process(Request request, RequestData requestData) {
+	public PageResponse process(RackRequest request, RequestData requestData) {
 		for (Page page : pages) {
 			RouteMatchResult matchResult = new SimpleRouteMatcher(new Route(
 					page.getRoute())).matches(request);

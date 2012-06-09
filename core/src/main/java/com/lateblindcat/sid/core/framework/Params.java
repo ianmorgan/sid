@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.lateblindcat.sid.core.framework.Params.Param;
+import com.lateblindcat.sid.rack.RackRequest;
 
 /**
  * <p>
@@ -73,6 +74,20 @@ public class Params implements Iterable<Param> {
 
 		for (String name : req.getParameterMap().keySet()) {
 			parts.add(new Param(name, req.getParameter(name)));
+		}
+	}
+
+	public Params(RackRequest req) {
+
+		String working = req.pathInfo();
+		if (working.startsWith("/")) {
+			working = working.substring(1, working.length());
+		}
+
+		buildFromStringArray(working.split("/"));
+
+		for (String name : req.params().keySet()) {
+			parts.add(new Param(name, req.params().get(name)));
 		}
 	}
 

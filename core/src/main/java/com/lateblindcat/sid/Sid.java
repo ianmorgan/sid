@@ -33,6 +33,8 @@ import com.lateblindcat.sid.core.handlers.TemplateHandler;
 import com.lateblindcat.sid.framework.pages.HomePage;
 import com.lateblindcat.sid.framework.pages.Page;
 import com.lateblindcat.sid.framework.pages.PageResponse;
+import com.lateblindcat.sid.rack.Env;
+import com.lateblindcat.sid.rack.RackRequest;
 import com.lateblindcat.sid.snapins.Snapin;
 
 public class Sid extends AbstractHandler {
@@ -51,12 +53,10 @@ public class Sid extends AbstractHandler {
 		handlers.add(new ContentPageHandler());
 		handlers.add(buildSnapins());
 		handlers.add(buildPageHandlers());
-		
-		//HandlerList<Snapin> snapins = new HandlerList<Snapin>()
-		
 
-		com.lateblindcat.sid.core.framework.Request request = new com.lateblindcat.sid.core.framework.Request(
-				httpServletRequest);
+		// HandlerList<Snapin> snapins = new HandlerList<Snapin>()
+
+		RackRequest request = new RackRequest(new Env(httpServletRequest));
 
 		for (Handler handler : handlers) {
 			System.out.println(">> handler: " + handler.getClass().getName());

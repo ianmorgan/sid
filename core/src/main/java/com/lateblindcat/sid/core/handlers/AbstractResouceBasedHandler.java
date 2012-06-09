@@ -12,6 +12,7 @@ import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
+import com.lateblindcat.sid.rack.RackRequest;
 
 /**
  * A generic handler that load and return content from a Spring Resource 
@@ -23,7 +24,7 @@ public abstract class AbstractResouceBasedHandler implements Handler {
 	
 	private ResourceLoader loader = new DefaultResourceLoader();
 
-	public PageResponse process(Request request, RequestData requestData) {
+	public PageResponse process(RackRequest request, RequestData requestData) {
 		RouteMatchResult matchResult = checkRoute(request, requestData);
 		if (matchResult.matched) {
 			Resource resource = loader.getResource(buildResourcePath(matchResult));
@@ -44,7 +45,7 @@ public abstract class AbstractResouceBasedHandler implements Handler {
 	}
 	
 	abstract protected PageResponse buildResponse(InputStream is); 
-	abstract protected RouteMatchResult checkRoute(Request request, RequestData requestDate);
+	abstract protected RouteMatchResult checkRoute(RackRequest request, RequestData requestDate);
 	abstract protected String buildResourcePath (RouteMatchResult matchResult);
 
 }

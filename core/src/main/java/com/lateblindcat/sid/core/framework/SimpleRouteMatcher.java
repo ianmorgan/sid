@@ -1,5 +1,7 @@
 package com.lateblindcat.sid.core.framework;
 
+import com.lateblindcat.sid.rack.RackRequest;
+
 
 /**
  * <p>Tests to see if a route matches the HttpRequest</p>
@@ -26,12 +28,12 @@ public class SimpleRouteMatcher {
 		this.route = route;
 	}
 
-	public RouteMatchResult matches(Request request) {
+	public RouteMatchResult matches(RackRequest request) {
 		RouteMatchResult result = new RouteMatchResult();
 
 		boolean matched = false;
 		Params routeParts = this.route.parts();
-		Params requestParts = request.params();
+		Params requestParts = new Params(request);
 		Params matchedParts = new Params();
 		
 		// TODO: This really could be quite a lot neater	

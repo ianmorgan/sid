@@ -1,8 +1,8 @@
 package com.lateblindcat.sid.snapins;
 
-import com.lateblindcat.sid.core.framework.Request;
 import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.framework.pages.PageResponse;
+import com.lateblindcat.sid.rack.RackRequest;
 
 /**
  * Defines a "snapin" type component. These automatically register and provide 
@@ -25,5 +25,5 @@ public interface Snapin {
 	 */
 	Route getRoute();
 
-	PageResponse process(Request request);
+	PageResponse process(RackRequest request);
 }

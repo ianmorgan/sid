@@ -10,7 +10,6 @@ import com.lateblindcat.sid.core.exception.ProcessingException;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
-import com.lateblindcat.sid.core.framework.Request;
 import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
@@ -19,6 +18,7 @@ import com.lateblindcat.sid.core.renderers.MarkdownRenderer;
 import com.lateblindcat.sid.core.renderers.VelocityRenderer;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
+import com.lateblindcat.sid.rack.RackRequest;
 
 /**
  * <p>
@@ -40,7 +40,7 @@ public class ContentPageHandler implements Handler {
 	private ResourceLoader loader = new DefaultResourceLoader();
 
 	@Override
-	public PageResponse process(Request request, RequestData requestData) {
+	public PageResponse process(RackRequest request, RequestData requestData) {
 		RouteMatchResult matchResult = routeMatcher.matches(request);
 
 		if (matchResult.matched) {

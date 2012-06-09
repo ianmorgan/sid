@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
 
+import com.lateblindcat.sid.rack.RackRequest;
+
 /**
  * A generalized class for passing data into a template for evaluation
  * 
@@ -21,7 +23,7 @@ public class Context {
 		setBean("now", new Date());
 	}
 
-	public Context(Request request) {
+	public Context(RackRequest request) {
 		this();
 		setBean("request", request);
 	}

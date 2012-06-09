@@ -1,6 +1,10 @@
 package com.lateblindcat.sid.rack;
 
 import java.io.InputStream;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -42,8 +46,32 @@ public class Env {
 	public String HTTP_CONNECTION;
 	public String HTTP_COOKIE;
 
+	// any HTTP variable
+	public Map<String, String> HTTP_VARIABLES;
+
 	public InputStream rack_input;
 	public InputStream rack_errors;
+
+	public Env() {
+	}
+
+	public Env(HttpServletRequest httpServletRequest) {
+		REQUEST_METHOD = httpServletRequest.getMethod();
+		PATH_INFO = httpServletRequest.getPathInfo();
+
+		// TODO - this is quite inefficient - should be able
+		// to pull this straight out the original request string.
+		if (httpServletRequest.getParameterMap().size() > 0) {
+			StringBuilder params = new StringBuilder();
+			for (Entry<String, String[]> entry : httpServletRequest.getParameterMap().entrySet()) {
+				if (params.length() > 0) {
+					params.append("&");
+				}
+				params.append(entry.getKey()).append("=").append(entry.getValue()[0]);
+			}
+			QUERY_STRING = params.toString();
+		}
+	}
 
 	// TODO what about other HTTP variables
 

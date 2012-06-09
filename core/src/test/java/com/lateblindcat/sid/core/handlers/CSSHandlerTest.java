@@ -6,11 +6,10 @@ import org.junit.Test;
 
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
-import com.lateblindcat.sid.core.framework.Request;
 import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.ServletTestCase;
-import com.lateblindcat.sid.core.handlers.CSSHandler;
 import com.lateblindcat.sid.framework.pages.PageResponse;
+import com.lateblindcat.sid.rack.RackRequest;
 
 public class CSSHandlerTest extends ServletTestCase {
 
@@ -18,7 +17,7 @@ public class CSSHandlerTest extends ServletTestCase {
 
 	@Test
 	public void shouldRenderCSSTemplate() {
-		Request request = this.servletRequest("GET", "/resources/css/layout.css");
+		RackRequest request = this.servletRequest("GET", "/resources/css/layout.css");
 		PageResponse response = handler.process(request, new RequestData());
 		StringExpression s = ExpressionFactory.string(response.getContent());
 

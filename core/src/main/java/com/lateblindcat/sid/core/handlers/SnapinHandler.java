@@ -10,13 +10,13 @@ import org.springframework.core.io.ResourceLoader;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
-import com.lateblindcat.sid.core.framework.Request;
 import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.core.renderers.VelocityRenderer;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
+import com.lateblindcat.sid.rack.RackRequest;
 import com.lateblindcat.sid.snapins.Snapin;
 
 public class SnapinHandler implements Handler {
@@ -29,7 +29,7 @@ public class SnapinHandler implements Handler {
 	}
 
 	@Override
-	public PageResponse process(Request request, RequestData requestData) {
+	public PageResponse process(RackRequest request, RequestData requestData) {
 		for (Snapin snapin : snapins) {
 			RouteMatchResult matchResult = new SimpleRouteMatcher(snapin.getRoute()).matches(request);
 			if (matchResult.matched) {
