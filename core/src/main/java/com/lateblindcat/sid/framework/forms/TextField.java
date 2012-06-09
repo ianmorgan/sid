@@ -2,7 +2,7 @@ package com.lateblindcat.sid.framework.forms;
 
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
-import com.lateblindcat.sid.core.framework.Request;
+import com.lateblindcat.sid.rack.RackRequest;
 
 public class TextField implements FormComponent {
 	private String name;
@@ -19,7 +19,7 @@ public class TextField implements FormComponent {
 	}
 
 	@Override
-	public StringExpression render(Request request) {
+	public StringExpression render(RackRequest request) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(label.toString());

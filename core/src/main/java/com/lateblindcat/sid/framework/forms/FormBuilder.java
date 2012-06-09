@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
-import com.lateblindcat.sid.core.framework.Request;
+import com.lateblindcat.sid.rack.RackRequest;
 
 public class FormBuilder {
 
@@ -23,7 +23,7 @@ public class FormBuilder {
 		return this;
 	}
 
-	public StringExpression render(Request request) {
+	public StringExpression render(RackRequest request) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<FORM ");

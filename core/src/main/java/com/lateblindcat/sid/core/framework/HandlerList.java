@@ -7,11 +7,11 @@ import java.util.List;
 import com.lateblindcat.sid.core.handlers.Handler;
 
 public class HandlerList<H extends Handler> implements Iterable<H> {
-	private List<HandlerListItem<H>> items = new ArrayList<HandlerListItem<H>>();
+	private List<HandlerListItem> items = new ArrayList<HandlerListItem>();
 
 	public void addAll(ModuleConfig moduleConfig, List<H> handlers) {
 		for (H h : handlers) {
-			HandlerListItem<H> item = new HandlerListItem<H>();
+			HandlerListItem item = new HandlerListItem();
 			item.handler = h;
 			item.moduleConfig = moduleConfig;
 			items.add(item);
@@ -21,7 +21,7 @@ public class HandlerList<H extends Handler> implements Iterable<H> {
 	@Override
 	public Iterator<H> iterator() {
 		List<H> results = new ArrayList<H>();
-		for (HandlerListItem<H> item : items) {
+		for (HandlerListItem item : items) {
 			results.add(item.handler);
 		}
 		return results.iterator();
@@ -29,7 +29,7 @@ public class HandlerList<H extends Handler> implements Iterable<H> {
 
 	public Iterable<H> handlersForModule(ModuleConfig moduleConfig) {
 		List<H> results = new ArrayList<H>();
-		for (HandlerListItem<H> item : items) {
+		for (HandlerListItem item : items) {
 			if (item.moduleConfig.equals(moduleConfig)) {
 				results.add(item.handler);
 			}
@@ -37,7 +37,7 @@ public class HandlerList<H extends Handler> implements Iterable<H> {
 		return results;
 	}
 
-	private class HandlerListItem<H> {
+	private class HandlerListItem {
 		public H handler;
 		public ModuleConfig moduleConfig;
 	}

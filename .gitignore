@@ -4,4 +4,4 @@
 *.war
 *.classpath
 target/
-**/velocity.log
+core/velocity.log
