@@ -7,7 +7,6 @@ import java.util.List;
 import com.lateblindcat.sid.core.handlers.Handler;
 
 public class HandlerList<H extends Handler> implements Iterable<H> {
-	private static final long serialVersionUID = -473297410372065849L;
 	private List<HandlerListItem<H>> items = new ArrayList<HandlerListItem<H>>();
 
 	public void addAll(ModuleConfig moduleConfig, List<H> handlers) {
@@ -38,7 +37,7 @@ public class HandlerList<H extends Handler> implements Iterable<H> {
 		return results;
 	}
 
-	private class HandlerListItem<H extends Handler> {
+	private class HandlerListItem<H> {
 		public H handler;
 		public ModuleConfig moduleConfig;
 	}

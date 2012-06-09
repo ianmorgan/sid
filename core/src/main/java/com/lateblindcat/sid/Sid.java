@@ -20,7 +20,6 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 import com.lateblindcat.sid.core.framework.AppContext;
 import com.lateblindcat.sid.core.framework.AppContextImpl;
 import com.lateblindcat.sid.core.framework.Config;
-import com.lateblindcat.sid.core.framework.HandlerList;
 import com.lateblindcat.sid.core.framework.HttpServletResponseBuilder;
 import com.lateblindcat.sid.core.framework.ModuleConfig;
 import com.lateblindcat.sid.core.framework.ModuleConfigLoader;

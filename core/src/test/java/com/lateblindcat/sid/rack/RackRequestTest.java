@@ -25,14 +25,12 @@ public class RackRequestTest {
 		assertEquals(jsonMap("{\"id\":\"99\"}"), result.params());
 	}
 
-	protected Map<String, String> jsonMap(String json) throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-
-		Map<String, String> result = mapper.readValue(json, new TypeReference<Map<String, String>>() {
-		});
-
-		System.out.println(result);
-		return result;
-
+	protected Map<String, String> jsonMap(String json) {
+		try {
+			return new ObjectMapper().readValue(json, new TypeReference<Map<String, String>>() {
+			});
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

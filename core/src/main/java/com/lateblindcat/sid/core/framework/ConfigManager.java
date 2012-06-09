@@ -50,7 +50,7 @@ public class ConfigManager {
 		
 		System.out.println (prop.getProperty("configClass"));
 		
-		Class clazz = this.getClass().getClassLoader().loadClass(prop.getProperty("configClass"));
+		Class<?> clazz = this.getClass().getClassLoader().loadClass(prop.getProperty("configClass"));
 		
 		ModuleConfig o = (ModuleConfig)clazz.newInstance();
 		

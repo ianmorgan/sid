@@ -1,7 +1,6 @@
 package com.lateblindcat.sid.core.renderers;
 
 import java.io.StringWriter;
-import java.util.Date;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;

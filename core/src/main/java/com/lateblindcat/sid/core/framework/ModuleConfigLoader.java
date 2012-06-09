@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jetty.util.log.Log;
 
 import com.lateblindcat.sid.core.exception.FatalException;
 
@@ -69,7 +68,7 @@ public class ModuleConfigLoader {
 			Properties prop = new Properties();
 			prop.load(loader.getResourceAsStream("bootstrap.properties"));
 
-			Class clazz = this.getClass().getClassLoader().loadClass(prop.getProperty("configClass"));
+			Class<?> clazz = this.getClass().getClassLoader().loadClass(prop.getProperty("configClass"));
 
 			return (ModuleConfig) clazz.newInstance();
 		} catch (Exception ex) {

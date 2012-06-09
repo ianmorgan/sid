@@ -9,6 +9,7 @@ import com.lateblindcat.sid.rack.servlet.ServletRackBridge;
  * wrapper on the HttpServletRequest that is designed to work in conjunction
  * with the RouteMatcher.
  * 
+ * @deprecated use RackRequest
  * 
  * @author Ian Morgan
  * 
