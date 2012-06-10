@@ -9,9 +9,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.lateblindcat.sid.core.framework.Route;
-import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
-
 public class SimpleRouteMatcherTest extends ServletTestCase {
 	private SimpleRouteMatcher matcher;
 
@@ -62,6 +59,21 @@ public class SimpleRouteMatcherTest extends ServletTestCase {
 		assertFalse(matcher.matches(servletRequest("GET", "/testx/this")).matched);
 		assertFalse(matcher.matches(servletRequest("GET", "/test/a/b/")).matched);
 	}
+	
+	@Test
+	public void complexGetRequestWithMultipleWildcards() {
+		// setup:
+		matcher = new SimpleRouteMatcher(new Route("GET:/say/*/to/*"));
+
+		// verify:
+		assertTrue(matcher.matches(servletRequest("GET", "/say/hello/to/world")).matched);
+		assertFalse(matcher.matches(servletRequest("GET", "/say/hello/to")).matched);
+		
+		// todo - should be passing out params into a splat like structure (as per sinatra)
+//		assertEquals("this", matcher.matches(servletRequest("GET", "/test/this")).expandedParts.head().value);
+//		assertFalse(matcher.matches(servletRequest("GET", "/testx/this")).matched);
+//		assertFalse(matcher.matches(servletRequest("GET", "/test/a/b/")).matched);
+	}
 
 	@Test
 	public void simpleGetRequestWithGlobbingWildcard() {
@@ -75,6 +87,15 @@ public class SimpleRouteMatcherTest extends ServletTestCase {
 		assertEquals("a/b/c", matcher.matches(servletRequest("GET", "/test/a/b/c")).expandedParts.expandToPath());
 
 		assertFalse(matcher.matches(servletRequest("GET", "/testx/this")).matched);
+	}
+	
+	@Test 
+	public void shouldPassWithExampleUsedInDocumentation(){
+		matcher = new SimpleRouteMatcher(new Route("GET:/demo/**"));	
+		assertTrue(matcher.matches(servletRequest("GET", "/demo/examples/helloworld")).matched);
+		assertTrue(matcher.matches(servletRequest("GET", "/demo/routing")).matched);
+
+		
 	}
 
 }

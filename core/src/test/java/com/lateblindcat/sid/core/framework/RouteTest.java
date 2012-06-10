@@ -5,9 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.lateblindcat.sid.core.framework.RequestType;
-import com.lateblindcat.sid.core.framework.Route;
-
 //@Test
 public class RouteTest {
 
@@ -15,7 +12,7 @@ public class RouteTest {
 	public void simpleGetRequest() {
 		Route route = new Route("GET:/test");
 
-		assertEquals(RequestType.GET, route.requestType());
+		assertEquals("GET", route.requestType());
 		assertEquals(1, route.parts().size());
 		assertEquals("test", route.parts().head().value);
 	}
@@ -24,7 +21,7 @@ public class RouteTest {
 	public void simpleGetRequestWithMultipleParts() {
 		Route route = new Route("GET:/test/this");
 
-		assertEquals(RequestType.GET, route.requestType());
+		assertEquals("GET", route.requestType());
 		assertEquals(2, route.parts().size());
 		assertEquals("test", route.parts().head().value);
 		assertEquals("this", route.parts().tail().head().value);
@@ -35,7 +32,7 @@ public class RouteTest {
 	public void simpleGetRequestWithId() {
 		Route route = new Route("GET:/test/:id");
 
-		assertEquals(RequestType.GET, route.requestType());
+		assertEquals("GET", route.requestType());
 		assertEquals(2, route.parts().size());
 		assertEquals("test", route.parts().head().value);
 		assertEquals(":id", route.parts().tail().head().value);

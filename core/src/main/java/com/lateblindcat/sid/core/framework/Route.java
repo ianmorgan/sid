@@ -10,7 +10,7 @@ import com.lateblindcat.sid.core.framework.Params.Param;
  */
 public class Route {
 
-	private final RequestType requestType;
+	private String requestType;
 	private final Params parts;
 
 	/**
@@ -19,7 +19,7 @@ public class Route {
 	 */
 	public Route(String route) {
 		String[] split = split(route);
-		requestType = RequestType.fromString(split[0]);
+		requestType = split[0];
 		parts = buildParts(split[1]);
 	}
 
@@ -33,7 +33,7 @@ public class Route {
 		return false;
 	}
 
-	public RequestType requestType() {
+	public String requestType() {
 		return requestType;
 	}
 
