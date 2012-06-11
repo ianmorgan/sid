@@ -7,7 +7,6 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.framework.pages.PageResponse;
 import com.lateblindcat.sid.framework.pages.PageResponseFactory;
@@ -23,8 +22,8 @@ public abstract class AbstractResouceBasedHandler implements Handler {
 	
 	private ResourceLoader loader = new DefaultResourceLoader();
 
-	public PageResponse process(RackRequest request, RequestData requestData) {
-		RouteMatchResult matchResult = checkRoute(request, requestData);
+	public PageResponse process(RackRequest request) {
+		RouteMatchResult matchResult = checkRoute(request);
 		if (matchResult.matched) {
 			Resource resource = loader.getResource(buildResourcePath(matchResult));
 			if (resource.exists()) {
@@ -44,7 +43,7 @@ public abstract class AbstractResouceBasedHandler implements Handler {
 	}
 	
 	abstract protected PageResponse buildResponse(InputStream is); 
-	abstract protected RouteMatchResult checkRoute(RackRequest request, RequestData requestDate);
+	abstract protected RouteMatchResult checkRoute(RackRequest request);
 	abstract protected String buildResourcePath (RouteMatchResult matchResult);
 
 }

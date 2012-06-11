@@ -5,7 +5,6 @@ import java.io.InputStream;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
-import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
@@ -27,7 +26,7 @@ public class CSSHandler extends AbstractResouceBasedHandler {
 	}
 
 	@Override
-	protected RouteMatchResult checkRoute(RackRequest request, RequestData requestDate) {
+	protected RouteMatchResult checkRoute(RackRequest request) {
 		return routeMatcher.matches(request);
 	}
 

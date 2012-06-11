@@ -60,7 +60,7 @@ public class Sid extends AbstractHandler {
 
 		for (Handler handler : handlers) {
 			System.out.println(">> handler: " + handler.getClass().getName());
-			PageResponse pageResponse = handler.process(request, null);
+			PageResponse pageResponse = handler.process(request);
 
 			if (pageResponse != null) {
 				HttpServletResponseBuilder.fromPageResponse(httpServletResponse, pageResponse);

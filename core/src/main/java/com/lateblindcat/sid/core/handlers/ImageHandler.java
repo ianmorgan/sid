@@ -2,7 +2,6 @@ package com.lateblindcat.sid.core.handlers;
 
 import java.io.InputStream;
 
-import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.Route;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
@@ -19,7 +18,7 @@ public class ImageHandler extends AbstractResouceBasedHandler {
 	}
 
 	@Override
-	protected RouteMatchResult checkRoute(RackRequest request, RequestData requestDate) {
+	protected RouteMatchResult checkRoute(RackRequest request) {
 		return routeMatcher.matches(request);
 	}
 

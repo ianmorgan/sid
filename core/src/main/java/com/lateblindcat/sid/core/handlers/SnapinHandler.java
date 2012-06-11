@@ -10,7 +10,6 @@ import org.springframework.core.io.ResourceLoader;
 import com.lateblindcat.sid.core.fp.ExpressionFactory;
 import com.lateblindcat.sid.core.fp.StringExpression;
 import com.lateblindcat.sid.core.framework.Context;
-import com.lateblindcat.sid.core.framework.RequestData;
 import com.lateblindcat.sid.core.framework.RouteMatchResult;
 import com.lateblindcat.sid.core.framework.SimpleRouteMatcher;
 import com.lateblindcat.sid.core.renderers.VelocityRenderer;
@@ -29,7 +28,7 @@ public class SnapinHandler implements Handler {
 	}
 
 	@Override
-	public PageResponse process(RackRequest request, RequestData requestData) {
+	public PageResponse process(RackRequest request) {
 		for (Snapin snapin : snapins) {
 			RouteMatchResult matchResult = new SimpleRouteMatcher(snapin.getRoute()).matches(request);
 			if (matchResult.matched) {

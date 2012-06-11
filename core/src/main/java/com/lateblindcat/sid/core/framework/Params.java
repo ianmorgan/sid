@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.lateblindcat.sid.core.framework.Params.Param;
 import com.lateblindcat.sid.rack.RackRequest;
 
@@ -63,19 +61,6 @@ import com.lateblindcat.sid.rack.RackRequest;
  */
 public class Params implements Iterable<Param> {
 	private List<Param> parts;
-
-	public Params(HttpServletRequest req) {
-		String working = req.getPathInfo();
-		if (working.startsWith("/")) {
-			working = working.substring(1, working.length());
-		}
-
-		buildFromStringArray(working.split("/"));
-
-		for (String name : req.getParameterMap().keySet()) {
-			parts.add(new Param(name, req.getParameter(name)));
-		}
-	}
 
 	public Params(RackRequest req) {
 
