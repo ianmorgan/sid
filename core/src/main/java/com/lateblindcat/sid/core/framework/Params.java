@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.lateblindcat.sid.core.framework.Params.Param;
 import com.lateblindcat.sid.rack.RackRequest;
 
@@ -141,6 +143,10 @@ public class Params implements Iterable<Param> {
 			if (sb.length() > 0) {
 				sb.append("/");
 			}
+			if (StringUtils.isNotEmpty(param.name)) {
+				sb.append("(" + param.name + ")");
+
+			}
 			sb.append(param.value);
 		}
 		return sb.toString();
@@ -167,12 +173,4 @@ public class Params implements Iterable<Param> {
 		public String name;
 	}
 
-	public Param named(String name) {
-		for (Param param : parts) {
-			if (name.equals(param.name)) {
-				return param;
-			}
-		}
-		return null;
-	}
 }
