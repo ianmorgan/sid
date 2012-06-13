@@ -143,9 +143,9 @@ public class Params implements Iterable<Param> {
 			if (sb.length() > 0) {
 				sb.append("/");
 			}
-			if (StringUtils.isNotEmpty(param.name)) {
+			if (StringUtils.isNotEmpty(param.name)){
 				sb.append("(" + param.name + ")");
-
+						
 			}
 			sb.append(param.value);
 		}
@@ -172,5 +172,6 @@ public class Params implements Iterable<Param> {
 		public String value;
 		public String name;
 	}
+
 
 }

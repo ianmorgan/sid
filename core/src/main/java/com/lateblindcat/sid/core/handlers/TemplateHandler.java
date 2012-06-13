@@ -57,10 +57,6 @@ public class TemplateHandler extends BaseHandler implements Handler {
 				return PageResponseFactory.notFound();
 			}
 
-			// } catch (RuntimeException re) {
-			// // TOD
-			// response = PageResponseFactory.notFound();
-			// }
 		} else {
 			return null;
 		}
