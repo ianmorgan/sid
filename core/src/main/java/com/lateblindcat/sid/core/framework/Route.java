@@ -1,5 +1,10 @@
 package com.lateblindcat.sid.core.framework;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.lateblindcat.sid.core.fp.ImmutableList;
 import com.lateblindcat.sid.core.framework.Params.Param;
 
 /**
@@ -11,7 +16,8 @@ import com.lateblindcat.sid.core.framework.Params.Param;
 public class Route {
 
 	private String requestType;
-	private final Params parts;
+	private final ImmutableList<String> parts;
+	
 
 	/**
 	 * 
@@ -20,32 +26,23 @@ public class Route {
 	public Route(String route) {
 		String[] split = split(route);
 		requestType = split[0];
-		parts = buildParts(split[1]);
+		parts = new ImmutableList<String>(buildParts(split[1]));
 	}
-
-	public boolean named(String name) {
-		name = ":" + name;
-		for (Param part : parts) {
-			if (name.equals(part.value)) {
-				return true;
-			}
-		}
-		return false;
-	}
+	
 
 	public String requestType() {
 		return requestType;
 	}
 
-	public Params parts() {
+	public ImmutableList<String> parts() {
 		return parts;
 	}
 
-	private Params buildParts(String url) {
+	private List<String> buildParts(String url) {
 		if (url.startsWith("/")) {
 			url = url.substring(1, url.length());
 		}
-		return new Params(url.split("/"));
+		return Arrays.asList(url.split("/"));
 	}
 
 	private String[] split(String route) {

@@ -14,7 +14,7 @@ public class RouteTest {
 
 		assertEquals("GET", route.requestType());
 		assertEquals(1, route.parts().size());
-		assertEquals("test", route.parts().head().value);
+		assertEquals("test", route.parts().head());
 	}
 	
 	@Test
@@ -23,8 +23,8 @@ public class RouteTest {
 
 		assertEquals("GET", route.requestType());
 		assertEquals(2, route.parts().size());
-		assertEquals("test", route.parts().head().value);
-		assertEquals("this", route.parts().tail().head().value);
+		assertEquals("test", route.parts().head());
+		assertEquals("this", route.parts().tail().head());
 	}
 	
 	
@@ -34,9 +34,9 @@ public class RouteTest {
 
 		assertEquals("GET", route.requestType());
 		assertEquals(2, route.parts().size());
-		assertEquals("test", route.parts().head().value);
-		assertEquals(":id", route.parts().tail().head().value);
-		assertTrue(route.named("id"));
+		assertEquals("test", route.parts().head());
+		assertEquals(":id", route.parts().tail().head());
+		//assertTrue(route.named("id"));
 	}
 
 

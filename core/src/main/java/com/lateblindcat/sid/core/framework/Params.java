@@ -1,15 +1,10 @@
 package com.lateblindcat.sid.core.framework;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.lateblindcat.sid.core.framework.Params.Param;
-import com.lateblindcat.sid.rack.RackRequest;
 
 /**
  * <p>
@@ -64,31 +59,13 @@ import com.lateblindcat.sid.rack.RackRequest;
 public class Params implements Iterable<Param> {
 	private List<Param> parts;
 
-	public Params(RackRequest req) {
-
-		String working = req.pathInfo();
-		if (working.startsWith("/")) {
-			working = working.substring(1, working.length());
-		}
-
-		buildFromStringArray(working.split("/"));
-
-		for (String name : req.params().keySet()) {
-			parts.add(new Param(name, req.params().get(name)));
-		}
-	}
-
-	public Params(Collection<String> params) {
-		buildFromStringArray(params.toArray(new String[0]));
-	}
+	
 
 	public Params(List<Param> params) {
 		this.parts = new ArrayList<Param>(params);
 	}
 
-	public Params(String[] parts) {
-		this(Arrays.asList(parts));
-	}
+	
 
 	public Params() {
 		this.parts = new ArrayList<Param>();
@@ -109,12 +86,6 @@ public class Params implements Iterable<Param> {
 
 	public Param head() {
 		return parts.get(0);
-	}
-
-	public Params tail() {
-		List<Param> working = new ArrayList<Param>(this.parts);
-		working.remove(0);
-		return new Params(working);
 	}
 
 	public Param last() {
@@ -143,21 +114,12 @@ public class Params implements Iterable<Param> {
 			if (sb.length() > 0) {
 				sb.append("/");
 			}
-			if (StringUtils.isNotEmpty(param.name)){
-				sb.append("(" + param.name + ")");
-						
-			}
 			sb.append(param.value);
 		}
 		return sb.toString();
 	}
 
-	private void buildFromStringArray(String[] params) {
-		this.parts = new ArrayList<Param>();
-		for (String param : params) {
-			parts.add(new Param(param));
-		}
-	}
+	
 
 	public class Param {
 		public Param(String value) {
