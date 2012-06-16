@@ -47,7 +47,6 @@ public class SimpleRouteMatcher {
 		ImmutableList<String> routeParts = route.parts();
 		ImmutableList<String> requestParts = buildRequestParts(request);
 
-		Params matchedParts = new Params();
 		Map<String, Object> matchedParams = new HashMap<String, Object>();
 		List<String> splats = new ArrayList<String>();
 		List<String> captures = new ArrayList<String>();
@@ -56,14 +55,12 @@ public class SimpleRouteMatcher {
 		while (true) {
 			if (!routeParts.isEmpty() && !requestParts.isEmpty()) {
 				if (routeParts.head().equals("*")) {
-					matchedParts = matchedParts.append(requestParts.head());
 					splats.add(requestParts.head());
 					requestParts = requestParts.tail();
 				} else if (routeParts.head().equals("**")) {
 					// TODO: this is a very simple globbing rule that
 					// assumes the ** is at the end of the param list
 					while (!requestParts.isEmpty()) {
-						matchedParts = matchedParts.append(requestParts.head());
 						splats.add(requestParts.head());
 						requestParts = requestParts.tail();
 					}
@@ -85,7 +82,6 @@ public class SimpleRouteMatcher {
 		}
 		if (matched) {
 			result.matched = true;
-			result.expandedParts = matchedParts;
 			matchedParams.put("splats", new ImmutableList<String>(splats));
 			matchedParams.put("captures", new ImmutableList<String>(captures));
 			result.matchedParams = new MatchedParams(matchedParams);

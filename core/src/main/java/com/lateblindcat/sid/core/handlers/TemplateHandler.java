@@ -42,9 +42,10 @@ public class TemplateHandler extends BaseHandler implements Handler {
 
 		if (matchResult.matched) {
 			// try {
-			String[] templates = this.fileExtensions(matchResult.expandedParts.last().value);
+			String[] templates = this.fileExtensions(matchResult.matchedParams.splats().last());
 
-			Resource template = loader.getResource("classpath:templates/" + matchResult.expandedParts.expandToPath());
+			Resource template = loader.getResource("classpath:templates/"
+					+ matchResult.matchedParams.splats().join("/"));
 			if (template.exists()) {
 				try {
 					StringExpression rawContent = ExpressionFactory.string(template.getInputStream());

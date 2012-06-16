@@ -58,7 +58,7 @@ public class SimpleRouteMatcherTest extends ServletTestCase {
 
 		// verify:
 		assertTrue(matcher.matches(servletRequest("GET", "/test/this")).matched);
-		assertEquals("this", matcher.matches(servletRequest("GET", "/test/this")).expandedParts.head().value);
+		assertEquals("this", matcher.matches(servletRequest("GET", "/test/this")).matchedParams.splats().head());
 		assertFalse(matcher.matches(servletRequest("GET", "/testx/this")).matched);
 		assertFalse(matcher.matches(servletRequest("GET", "/test/a/b/")).matched);
 	}
@@ -117,9 +117,15 @@ public class SimpleRouteMatcherTest extends ServletTestCase {
 
 		// verify:
 		assertTrue(matcher.matches(servletRequest("GET", "/test/this")).matched);
-		assertEquals("this", matcher.matches(servletRequest("GET", "/test/this")).expandedParts.head().value);
+		assertEquals("this", matcher.matches(servletRequest("GET", "/test/this")).matchedParams.splats().head());
 		assertTrue(matcher.matches(servletRequest("GET", "/test/a/b/c")).matched);
-		assertEquals("a/b/c", matcher.matches(servletRequest("GET", "/test/a/b/c")).expandedParts.expandToPath());
+		
+		ImmutableList<String> splats = matcher.matches(servletRequest("GET", "/test/a/b/c")).matchedParams.splats();
+		//assertEquals("a/b/c", matcher.matches(servletRequest("GET", "/test/a/b/c")).expandedParts.expandToPath());
+		assertEquals("a",splats.get(0));
+		assertEquals("b",splats.get(1));
+		assertEquals("c",splats.get(2));
+
 
 		assertFalse(matcher.matches(servletRequest("GET", "/testx/this")).matched);
 	}
