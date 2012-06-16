@@ -14,7 +14,6 @@ import java.util.List;
  * @author Ian Morgan
  * 
  */
-
 public class ImmutableList<T> implements Iterable<T> {
 	private List<T> parts;
 
@@ -37,6 +36,10 @@ public class ImmutableList<T> implements Iterable<T> {
 	@Override
 	public Iterator<T> iterator() {
 		return parts.iterator();
+	}
+
+	public T get(int index) {
+		return parts.get(index);
 	}
 
 	public int size() {

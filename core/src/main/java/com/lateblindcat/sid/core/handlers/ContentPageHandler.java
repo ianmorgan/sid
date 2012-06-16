@@ -58,11 +58,11 @@ public class ContentPageHandler implements Handler {
 
 	private String mergeContentTemplate(RouteMatchResult matchResult, String layout) {
 		StringExpression rawContent;
-		if (matchResult.expandedParts.size() > 0) {
+		if (matchResult.matchedParams.splats().size() > 0) {
 			String content = "";
 			try {
 				rawContent = ExpressionFactory.string(new File("src/main/resources/templates/"
-						+ matchResult.expandedParts.expandToPath() + ".md"));
+						+ matchResult.matchedParams.splats().join("/") + ".md"));
 
 				content = new MarkdownRenderer().render(new Context(), rawContent).eval();
 			} catch (ProcessingException ex) {

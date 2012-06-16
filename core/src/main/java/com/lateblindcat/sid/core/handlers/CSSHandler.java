@@ -32,6 +32,6 @@ public class CSSHandler extends AbstractResouceBasedHandler {
 
 	@Override
 	protected String buildResourcePath(RouteMatchResult matchResult) {
-		return "classpath:css/" + matchResult.expandedParts.expandToPath();
+		return "classpath:css/" + matchResult.matchedParams.splats().join("/");
 	}
 }

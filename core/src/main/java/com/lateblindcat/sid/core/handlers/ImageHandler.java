@@ -24,7 +24,7 @@ public class ImageHandler extends AbstractResouceBasedHandler {
 
 	@Override
 	protected String buildResourcePath(RouteMatchResult matchResult) {
-		return "classpath:images/" + matchResult.expandedParts.expandToPath();
+		return "classpath:images/" + matchResult.matchedParams.splats().join("/");
 	}
 
 }
